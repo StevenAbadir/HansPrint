@@ -133,8 +133,8 @@ nav {
   background: linear-gradient(90deg, #b8922a, #e2bc50, #b8922a);
 }
 .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2; }
-.hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: #8a6a18; margin-bottom: 1.25rem; display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(184,146,42,0.1); border: 1px solid rgba(184,146,42,0.3); padding: 0.35rem 0.9rem; border-radius: 100px; }
-.hero-title { font-family: 'Lora', serif; font-size: clamp(2.4rem, 4vw, 3.8rem); font-weight: 600; line-height: 1.15; color: #1a1410; margin-bottom: 1.25rem; }
+.hero-eyebrow { font-family: 'Lora', serif; font-size: clamp(2.2rem, 3.5vw, 3.4rem); font-weight: 600; line-height: 1.15; color: #1a1410; margin-bottom: 1.25rem; display: block; background: none; border: none; padding: 0; border-radius: 0; letter-spacing: -0.01em; text-transform: none; }
+.hero-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #8a6a18; margin-bottom: 1.5rem; font-family: 'Montserrat', sans-serif; line-height: 1.5; display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(184,146,42,0.1); border: 1px solid rgba(184,146,42,0.3); padding: 0.4rem 1rem; border-radius: 100px; }
 .hero-title em { font-style: italic; color: #b8922a; }
 .hero-sub { font-size: 1rem; font-weight: 300; line-height: 1.75; color: #6b5c3e; max-width: 420px; margin-bottom: 2.5rem; }
 .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -456,8 +456,8 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
 <section class="hero">
   <div class="hero-inner">
     <div>
-      <div class="hero-eyebrow" data-i18n="hero-eyebrow">Gebrauchte Druckmaschinen · Geprüfte Qualität</div>
-      <h1 class="hero-title" data-i18n="hero-title">Professionelle Druckmaschinen.<br><em>Zum fairen Preis.</em></h1>
+      <div class="hero-title" data-i18n="hero-title">Professionelle Druckmaschinen · <em>Zum fairen Preis</em></div>
+      <h1 class="hero-eyebrow" data-i18n="hero-eyebrow">Gebrauchte Druckmaschinen · Geprüfte Qualität</h1>
       <p class="hero-sub" data-i18n="hero-sub">HansarPrint vermittelt hochwertige gebrauchte Druckmaschinen renommierter Hersteller – vollständig geprüft, dokumentiert und betriebsbereit geliefert.</p>
       <div class="hero-btns">
         <a href="#maschinen" class="btn-white" data-i18n="hero-btn1">Maschinen ansehen</a>
