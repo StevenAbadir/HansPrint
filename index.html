@@ -640,19 +640,22 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
 <footer>
   <div class="foot-logo">
     <svg viewBox="0 0 200 230" fill="none">
-      <path d="M100 5 L195 45 L195 140 C195 185 155 218 100 228 C45 218 5 185 5 140 L5 45 Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="5"/>
-      <path d="M100 5 L195 45 L195 140 C195 185 155 218 100 228 L100 145 Z" fill="rgba(107,63,160,0.5)"/>
-      <rect x="62" y="55" width="14" height="75" fill="#4a7c3f" opacity="0.8"/>
-      <rect x="62" y="88" width="50" height="14" fill="#4a7c3f" opacity="0.8"/>
-      <rect x="98" y="55" width="14" height="75" fill="#4a7c3f" opacity="0.8"/>
-      <path d="M112 55 Q148 55 148 78 Q148 100 112 100" stroke="#4a7c3f" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.8"/>
+      <path d="M100 5 L195 45 L195 140 C195 185 155 218 100 228 C45 218 5 185 5 140 L5 45 Z" fill="rgba(255,255,255,0.08)" stroke="rgba(184,146,42,0.4)" stroke-width="5"/>
+      <path d="M100 5 L195 45 L195 140 C195 185 155 218 100 228 L100 145 Z" fill="rgba(184,146,42,0.2)"/>
+      <rect x="62" y="55" width="14" height="75" fill="#d4aa50" opacity="0.8"/>
+      <rect x="62" y="88" width="50" height="14" fill="#d4aa50" opacity="0.8"/>
+      <rect x="98" y="55" width="14" height="75" fill="#d4aa50" opacity="0.8"/>
+      <path d="M112 55 Q148 55 148 78 Q148 100 112 100" stroke="#d4aa50" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.8"/>
       <text x="100" y="168" font-family="Montserrat,sans-serif" font-size="18" font-weight="700" fill="rgba(255,255,255,0.6)" text-anchor="middle" letter-spacing="3">HANSAR</text>
       <text x="100" y="192" font-family="Montserrat,sans-serif" font-size="22" font-weight="800" fill="rgba(255,255,255,0.6)" text-anchor="middle" letter-spacing="4">PRINT</text>
     </svg>
     <span class="foot-name">HansarPrint</span>
   </div>
   <div>© 2026 HansarPrint · <span data-i18n="foot-sub">Gebrauchte Druckmaschinen</span> · Bitburg</div>
-  <div>Impressum · Datenschutz · AGB</div>
+  <div style="display:flex;gap:1.25rem;">
+    <a href="impressum.html" style="color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.75rem;transition:color 0.2s;" onmouseover="this.style.color='#d4aa50'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Impressum</a>
+    <a href="impressum.html#tab-datenschutz" onclick="sessionStorage.setItem('legal-tab','datenschutz')" style="color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.75rem;transition:color 0.2s;" onmouseover="this.style.color='#d4aa50'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Datenschutz</a>
+  </div>
 </footer>
 
 <script>
