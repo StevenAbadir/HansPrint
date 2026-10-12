@@ -123,7 +123,8 @@ nav {
 
 /* ── ABOUT ── */
 .about { padding: 6rem 0; background: var(--off-white); }
-.about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.about-right-sticky { position: sticky; top: 90px; }
 .about-text p { font-size: 0.95rem; line-height: 1.8; color: var(--gray-600); }
 .about-text p + p { margin-top: 1rem; }
 .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2rem; }
@@ -460,15 +461,15 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
         </div>
       </div>
 
-      <div>
+      <div class="about-right-sticky">
         <div style="background: var(--purple); border-radius: 16px; padding: 2.5rem; color: white; text-align: center; margin-bottom:1.5rem;">
           <div style="font-size:2.5rem; margin-bottom:1rem;">🖨️</div>
           <p style="font-size:1.15rem; font-weight:700; margin:0 0 0.75rem;" data-i18n="about-tagline">International aufgestellt. Zuverlässig im Handel.</p>
           <p style="opacity:0.85; font-size:0.92rem; margin:0;" data-i18n="about-tagline-sub">Von unserem Standort in Deutschland und unseren weiteren Lagerstandorten aus sind wir im internationalen Handel mit gebrauchten Druckmaschinen tätig. Wir verbinden praktische Marktkenntnisse mit einer flexiblen und kundenorientierten Arbeitsweise.</p>
         </div>
-        <div style="background: var(--surface); border-radius: 16px; padding: 2rem; text-align:center;">
-          <p style="font-weight:700; margin:0 0 0.5rem; color:var(--text);" data-i18n="about-cta-title">Interesse? Wir freuen uns auf Ihre Anfrage.</p>
-          <p style="color:var(--text-secondary); font-size:0.9rem; margin:0 0 1.25rem;" data-i18n="about-cta-desc">Sie möchten Druckmaschinen kaufen, Ihre Maschinen verkaufen oder eine komplette Druckerei auflösen?</p>
+        <div style="background: var(--gray-100); border-radius: 16px; padding: 2rem; text-align:center; border: 1px solid var(--gray-200);">
+          <p style="font-weight:700; margin:0 0 0.5rem; color:var(--ink);" data-i18n="about-cta-title">Interesse? Wir freuen uns auf Ihre Anfrage.</p>
+          <p style="color:var(--gray-600); font-size:0.9rem; margin:0 0 1.25rem;" data-i18n="about-cta-desc">Sie möchten Druckmaschinen kaufen, Ihre Maschinen verkaufen oder eine komplette Druckerei auflösen?</p>
           <a href="#kontakt" class="btn-primary" data-i18n="about-cta-btn">Jetzt Anfrage stellen</a>
         </div>
       </div>
