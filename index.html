@@ -314,6 +314,20 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
 .team-contact-link:hover { color: var(--purple); }
 .ticon { font-size: 0.9rem; min-width: 18px; }
 
+/* ── SCROLL ANIMATIONS ── */
+.scroll-fade { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.scroll-fade.visible { opacity: 1; transform: translateY(0); }
+.scroll-left { opacity: 0; transform: translateX(-36px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.scroll-left.visible { opacity: 1; transform: translateX(0); }
+.scroll-right { opacity: 0; transform: translateX(36px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.scroll-right.visible { opacity: 1; transform: translateX(0); }
+.scroll-fade.d1, .scroll-left.d1, .scroll-right.d1 { transition-delay: 0.1s; }
+.scroll-fade.d2, .scroll-left.d2, .scroll-right.d2 { transition-delay: 0.2s; }
+.scroll-fade.d3, .scroll-left.d3, .scroll-right.d3 { transition-delay: 0.3s; }
+@media (prefers-reduced-motion: reduce) {
+  .scroll-fade, .scroll-left, .scroll-right { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .hero-inner { grid-template-columns: 1fr; }
@@ -449,8 +463,8 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
   <div class="section-wrap">
     <div class="about-inner">
       <div>
-        <div class="section-eyebrow" data-i18n="about-eyebrow">Über HansarPrint</div>
-        <h2 class="section-title" data-i18n="about-title">Ihr Partner für Druckmaschinen weltweit</h2>
+        <div class="section-eyebrow scroll-left" data-i18n="about-eyebrow">Über HansarPrint</div>
+        <h2 class="section-title scroll-left d1" data-i18n="about-title">Ihr Partner für Druckmaschinen weltweit</h2>
         <div class="about-text">
           <p data-i18n="about-p1">HansarPrint ist ein in Bitburg, Deutschland, ansässiges Handelsunternehmen, das sich auf den An- und Verkauf gebrauchter Druckmaschinen und Druckweiterverarbeitungsmaschinen spezialisiert hat. Wir sind im nationalen und internationalen Maschinenhandel tätig und betreuen Geschäftspartner in verschiedenen Ländern.</p>
           <p data-i18n="about-p2">Mit unseren Lagerstandorten in Deutschland und weiteren Ländern, darunter Ägypten, verfügen wir über eine internationale Präsenz, die es uns ermöglicht, flexibel auf die Anforderungen unserer Kunden und Geschäftspartner einzugehen.</p>
@@ -491,8 +505,8 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
 <section class="machines" id="maschinen">
   <div class="section-wrap">
     <div class="machines-header">
-      <div class="section-eyebrow" data-i18n="mach-eyebrow">Aktueller Bestand</div>
-      <h2 class="section-title" data-i18n="mach-title">Verfügbare Druckmaschinen</h2>
+      <div class="section-eyebrow scroll-fade" data-i18n="mach-eyebrow">Aktueller Bestand</div>
+      <h2 class="section-title scroll-fade d1" data-i18n="mach-title">Verfügbare Druckmaschinen</h2>
       <p class="section-sub" data-i18n="mach-sub">Alle Maschinen sind sofort besichtigbar. Preise auf Anfrage – Finanzierung möglich.</p>
     </div>
     <div class="filter-bar">
@@ -503,7 +517,7 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
     </div>
     <div class="mgrid" id="mgrid">
 
-      <div class="mcard polar-card" data-cat="weiter">
+      <div class="mcard polar-card scroll-fade" data-cat="weiter">
         <div class="mcard-img polar-img" style="height:240px; position:relative; overflow:hidden; background:#1a1a18; clip-path:inset(0);">
           <!-- Image slider -->
           <div style="position:absolute;inset:0;overflow:hidden;width:100%;">
@@ -557,8 +571,8 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
   <div class="section-wrap">
     <div class="ankauf-inner">
       <div>
-        <div class="section-eyebrow" data-i18n="buy-eyebrow">Maschinenankauf</div>
-        <h2 class="section-title" data-i18n="buy-title">Wir kaufen Ihre Druckmaschine</h2>
+        <div class="section-eyebrow scroll-left" data-i18n="buy-eyebrow">Maschinenankauf</div>
+        <h2 class="section-title scroll-left d1" data-i18n="buy-title">Wir kaufen Ihre Druckmaschine</h2>
         <p class="section-sub" data-i18n="buy-sub">Sie möchten eine Maschine verkaufen? HansarPrint kauft gebrauchte Druckmaschinen aller namhaften Hersteller – schnell, unkompliziert und zum fairen Marktpreis.</p>
 
       </div>
@@ -603,26 +617,26 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
 <section class="process" id="ablauf">
   <div class="process-inner">
     <div class="process-header">
-      <div class="section-eyebrow" style="text-align:center" data-i18n="proc-eyebrow">So funktioniert es</div>
-      <h2 class="section-title" style="text-align:center" data-i18n="proc-title">Einfach & transparent</h2>
+      <div class="section-eyebrow scroll-fade" style="text-align:center" data-i18n="proc-eyebrow">So funktioniert es</div>
+      <h2 class="section-title scroll-fade d1" style="text-align:center" data-i18n="proc-title">Einfach & transparent</h2>
     </div>
     <div class="steps">
-      <div class="step">
+      <div class="step scroll-fade">
         <div class="step-circle">1</div>
         <div class="step-title" data-i18n="step1-title">Anfrage stellen</div>
         <div class="step-desc" data-i18n="step1-desc">Beschreiben Sie Ihre Anforderungen – oder fragen Sie direkt zu einer Maschine an.</div>
       </div>
-      <div class="step">
+      <div class="step scroll-fade d1">
         <div class="step-circle">2</div>
         <div class="step-title" data-i18n="step2-title">Beratung</div>
         <div class="step-desc" data-i18n="step2-desc">Persönliches Gespräch mit einem Fachmann – keine Verkaufsfloskeln.</div>
       </div>
-      <div class="step">
+      <div class="step scroll-fade d2">
         <div class="step-circle">3</div>
         <div class="step-title" data-i18n="step3-title">Besichtigung</div>
         <div class="step-desc" data-i18n="step3-desc">Maschinen können jederzeit vor Ort besichtigt und getestet werden.</div>
       </div>
-      <div class="step">
+      <div class="step scroll-fade d3">
         <div class="step-circle">4</div>
         <div class="step-title" data-i18n="step4-title">Lieferung & Start</div>
         <div class="step-desc" data-i18n="step4-desc">Wir koordinieren alles bis zur Betriebsbereitschaft bei Ihnen vor Ort.</div>
@@ -635,14 +649,14 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
 <section class="team-section" id="team">
   <div class="section-wrap">
     <div style="text-align:center; margin-bottom:3rem;">
-      <div class="section-eyebrow" data-i18n="team-eyebrow">Unser Team</div>
-      <h2 class="section-title" data-i18n="team-title">Direkt erreichbar für Sie</h2>
+      <div class="section-eyebrow scroll-fade" data-i18n="team-eyebrow">Unser Team</div>
+      <h2 class="section-title scroll-fade d1" data-i18n="team-title">Direkt erreichbar für Sie</h2>
       <p class="section-sub" style="margin:0 auto;" data-i18n="team-sub">Sprechen Sie unsere Mitarbeiter persönlich an – wir antworten schnell und unkompliziert.</p>
     </div>
     <div class="team-grid">
 
       <!-- Osama Abadir -->
-      <div class="team-card">
+      <div class="team-card scroll-left">
         <div class="team-avatar">OA</div>
         <div class="team-info">
           <div class="team-role" data-i18n="team-role1">Geschäftsinhaber</div>
@@ -662,7 +676,7 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
       </div>
 
       <!-- Steven Abadir -->
-      <div class="team-card">
+      <div class="team-card scroll-right">
         <div class="team-avatar" style="background:var(--green);">SA</div>
         <div class="team-info">
           <div class="team-role" data-i18n="team-role2">Mitarbeiter</div>
@@ -690,8 +704,8 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
   <div class="section-wrap">
     <div class="contact-inner">
       <div>
-        <div class="section-eyebrow" data-i18n="con-eyebrow">Kontakt</div>
-        <h2 class="section-title" data-i18n="con-title">Sprechen wir miteinander.</h2>
+        <div class="section-eyebrow scroll-left" data-i18n="con-eyebrow">Kontakt</div>
+        <h2 class="section-title scroll-left d1" data-i18n="con-title">Sprechen wir miteinander.</h2>
         <p class="contact-desc" data-i18n="con-desc">Jede Anfrage wird persönlich beantwortet. Kein Formular ersetzt ein gutes Gespräch – aber es hilft uns, gut vorbereitet zu sein.</p>
         <div class="info-rows">
           <div class="info-row"><span class="iicon">📍</span> Am Tower 1, 54634 Bitburg</div>
@@ -1259,6 +1273,22 @@ function polarSlide(i) {
 }
 function polarNext() { polarSlide((polarIdx+1)%3); }
 function polarPrev() { polarSlide((polarIdx+2)%3); }
+
+// ── SCROLL ANIMATIONS ──
+(function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.scroll-fade, .scroll-left, .scroll-right').forEach(function(el) {
+    observer.observe(el);
+  });
+})();
 </script>
 </body>
 </html>
