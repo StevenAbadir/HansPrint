@@ -10,13 +10,13 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --purple: #6B3FA0;
-  --purple-dark: #4a2870;
-  --purple-light: #8f5fc0;
-  --purple-pale: #f0eaf8;
-  --green: #4a7c3f;
-  --green-light: #6aaa5c;
-  --green-pale: #eaf3e8;
+  --purple: #b8922a;
+  --purple-dark: #8a6a18;
+  --purple-light: #d4aa50;
+  --purple-pale: #faf3e0;
+  --green: #9a7a20;
+  --green-light: #c9a227;
+  --green-pale: #f5e9c8;
   --white: #ffffff;
   --off-white: #fafaf9;
   --gray-100: #f4f4f2;
@@ -141,7 +141,7 @@ nav {
 .fbtn:hover, .fbtn.active { background: var(--purple); border-color: var(--purple); color: var(--white); }
 .mgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1.75rem; }
 .mcard { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
-.mcard:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(107,63,160,0.12); }
+.mcard:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(184,146,42,0.15); }
 .mcard-img { height: 190px; background: var(--purple-pale); display: flex; align-items: center; justify-content: center; position: relative; }
 .mcard-img svg { width: 75%; height: 75%; opacity: 0.3; }
 .mbadge { position: absolute; top: 1rem; left: 1rem; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 100px; }
@@ -162,7 +162,7 @@ nav {
 
 /* ── ANKAUF SECTION ── */
 .ankauf { padding: 6rem 0; background: var(--gray-800); }
-.ankauf .section-eyebrow { color: #c8f5b0; }
+.ankauf .section-eyebrow { color: #e2bc50; }
 .ankauf .section-title { color: var(--white); }
 .ankauf .section-sub { color: rgba(255,255,255,0.6); }
 .ankauf-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
@@ -172,11 +172,11 @@ nav {
 .ankauf-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
 .ankauf-item-text strong { display: block; font-size: 0.88rem; font-weight: 700; color: var(--white); margin-bottom: 0.15rem; }
 .ankauf-item-text span { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
-.ankauf-cta-box { background: rgba(200,245,176,0.08); border: 1px solid rgba(200,245,176,0.2); border-radius: 12px; padding: 2.5rem; margin-top: 2rem; }
-.ankauf-cta-box h3 { font-family: 'Lora', serif; font-size: 1.5rem; color: #c8f5b0; margin-bottom: 0.75rem; }
+.ankauf-cta-box { background: rgba(184,146,42,0.08); border: 1px solid rgba(184,146,42,0.2); border-radius: 12px; padding: 2.5rem; margin-top: 2rem; }
+.ankauf-cta-box h3 { font-family: 'Lora', serif; font-size: 1.5rem; color: #e2bc50; margin-bottom: 0.75rem; }
 .ankauf-cta-box p { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 1.5rem; }
-.btn-green-outline { background: transparent; color: #c8f5b0; border: 2px solid rgba(200,245,176,0.4); padding: 0.9rem 2rem; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 4px; display: inline-block; transition: all 0.2s; }
-.btn-green-outline:hover { background: rgba(200,245,176,0.1); border-color: #c8f5b0; }
+.btn-green-outline { background: transparent; color: #e2bc50; border: 2px solid rgba(226,188,80,0.4); padding: 0.9rem 2rem; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 4px; display: inline-block; transition: all 0.2s; }
+.btn-green-outline:hover { background: rgba(226,188,80,0.1); border-color: #e2bc50; }
 .ankauf-steps { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
 .ankauf-step { display: flex; gap: 1.25rem; align-items: flex-start; }
 .ankauf-step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--purple); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
@@ -184,14 +184,14 @@ nav {
 .ankauf-step-text span { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
 
 /* ── REVIEWS ── */
-.reviews { background: var(--purple-pale); padding: 6rem 0; }
+.reviews { background: #faf3e0; padding: 6rem 0; }
 .reviews-header { text-align: center; margin-bottom: 3.5rem; }
 .stars-big { font-size: 1.1rem; color: #f59e0b; letter-spacing: 2px; margin-bottom: 0.4rem; }
 .rating-line { font-size: 0.8rem; color: var(--gray-600); }
 .rating-line strong { color: var(--ink); font-weight: 700; }
 .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
-.review-card { background: var(--white); border-radius: 12px; padding: 1.75rem; border: 1px solid rgba(107,63,160,0.1); position: relative; }
-.review-card::before { content: '\201C'; position: absolute; top: 1rem; right: 1.5rem; font-family: 'Lora', serif; font-size: 4rem; color: var(--purple-pale); line-height: 1; font-weight: 600; }
+.review-card { background: var(--white); border-radius: 12px; padding: 1.75rem; border: 1px solid rgba(184,146,42,0.12); position: relative; }
+.review-card::before { content: '\201C'; position: absolute; top: 1rem; right: 1.5rem; font-family: 'Lora', serif; font-size: 4rem; color: #f5e9c8; line-height: 1; font-weight: 600; }
 .review-stars { color: #f59e0b; font-size: 0.9rem; letter-spacing: 1px; margin-bottom: 0.75rem; }
 .review-text { font-size: 0.9rem; line-height: 1.7; color: var(--gray-600); margin-bottom: 1.25rem; font-style: italic; }
 .review-author { display: flex; align-items: center; gap: 0.75rem; }
@@ -219,7 +219,7 @@ nav {
 /* ── CONTACT ── */
 .contact { background: var(--gray-800); padding: 6rem 0; }
 .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-.contact .section-eyebrow { color: #c8f5b0; }
+.contact .section-eyebrow { color: #e2bc50; }
 .contact .section-title { color: var(--white); }
 .contact-desc { font-size: 0.95rem; color: rgba(255,255,255,0.6); line-height: 1.75; margin-bottom: 2rem; }
 .info-rows { border-top: 1px solid rgba(255,255,255,0.1); }
@@ -235,11 +235,11 @@ nav {
   font-size: 0.9rem; outline: none; border-radius: 6px; transition: border-color 0.2s; resize: vertical;
 }
 .fgroup input::placeholder, .fgroup textarea::placeholder { color: rgba(255,255,255,0.25); }
-.fgroup input:focus, .fgroup textarea:focus, .fgroup select:focus { border-color: var(--purple-light); }
+.fgroup input:focus, .fgroup textarea:focus, .fgroup select:focus { border-color: #d4aa50; }
 .fgroup select option { background: var(--gray-800); }
 .btn-green { background: var(--green); color: #fff; padding: 1rem 2rem; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border: none; border-radius: 6px; cursor: pointer; width: 100%; transition: background 0.2s; margin-top: 0.25rem; }
 .btn-green:hover { background: var(--green-light); }
-.form-thanks { display: none; text-align: center; padding: 2.5rem; color: #c8f5b0; }
+.form-thanks { display: none; text-align: center; padding: 2.5rem; color: #e2bc50; }
 .form-thanks .big { font-family: 'Lora', serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
 .form-thanks p { font-size: 0.85rem; color: rgba(255,255,255,0.5); }
 
@@ -253,7 +253,7 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
 .team-section { padding: 6rem 0; background: var(--gray-100); }
 .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 900px; margin: 0 auto; }
 .team-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px; padding: 2rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: box-shadow 0.2s; }
-.team-card:hover { box-shadow: 0 8px 32px rgba(107,63,160,0.1); }
+.team-card:hover { box-shadow: 0 8px 32px rgba(184,146,42,0.12); }
 .team-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--purple); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 700; flex-shrink: 0; letter-spacing: 0.05em; }
 .team-info { flex: 1; min-width: 0; }
 .team-role { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--purple); margin-bottom: 0.3rem; }
@@ -289,14 +289,14 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
 <nav>
   <a class="nav-logo-wrap" href="#">
     <svg class="nav-logo-svg" viewBox="0 0 200 230" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M100 5 L195 45 L195 140 C195 185 155 218 100 228 C45 218 5 185 5 140 L5 45 Z" fill="white" stroke="#6B3FA0" stroke-width="6"/>
-      <path d="M100 5 L195 45 L195 140 C195 185 155 218 100 228 L100 145 Z" fill="#6B3FA0"/>
-      <rect x="62" y="55" width="14" height="75" fill="#4a7c3f"/>
-      <rect x="62" y="88" width="50" height="14" fill="#4a7c3f"/>
-      <rect x="98" y="55" width="14" height="75" fill="#4a7c3f"/>
-      <path d="M112 55 Q148 55 148 78 Q148 100 112 100" stroke="#4a7c3f" stroke-width="14" fill="none" stroke-linecap="round"/>
-      <text x="100" y="168" font-family="Montserrat,sans-serif" font-size="18" font-weight="700" fill="white" text-anchor="middle" letter-spacing="3">HANSAR</text>
-      <text x="100" y="192" font-family="Montserrat,sans-serif" font-size="22" font-weight="800" fill="white" text-anchor="middle" letter-spacing="4">PRINT</text>
+      <path d="M100 5 L195 45 L195 140 C195 185 155 218 100 228 C45 218 5 185 5 140 L5 45 Z" fill="white" stroke="#b8922a" stroke-width="6"/>
+      <path d="M100 5 L195 45 L195 140 C195 185 155 218 100 228 L100 145 Z" fill="#f5e9c8"/>
+      <rect x="62" y="55" width="14" height="75" fill="#b8922a"/>
+      <rect x="62" y="88" width="50" height="14" fill="#b8922a"/>
+      <rect x="98" y="55" width="14" height="75" fill="#b8922a"/>
+      <path d="M112 55 Q148 55 148 78 Q148 100 112 100" stroke="#b8922a" stroke-width="14" fill="none" stroke-linecap="round"/>
+      <text x="100" y="168" font-family="Montserrat,sans-serif" font-size="18" font-weight="700" fill="#1a1410" text-anchor="middle" letter-spacing="3">HANSAR</text>
+      <text x="100" y="192" font-family="Montserrat,sans-serif" font-size="22" font-weight="800" fill="#1a1410" text-anchor="middle" letter-spacing="4">PRINT</text>
     </svg>
     <div class="nav-brand">HansarPrint <span data-i18n="nav-sub">Druckmaschinen</span></div>
   </a>
@@ -329,14 +329,14 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
     </div>
     <div class="hero-logo-big">
       <svg viewBox="0 0 200 230" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M100 5 L195 45 L195 140 C195 185 155 218 100 228 C45 218 5 185 5 140 L5 45 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.4)" stroke-width="4"/>
-        <path d="M100 5 L195 45 L195 140 C195 185 155 218 100 228 L100 145 Z" fill="rgba(255,255,255,0.15)"/>
-        <rect x="62" y="55" width="14" height="75" fill="#c8f5b0"/>
-        <rect x="62" y="88" width="50" height="14" fill="#c8f5b0"/>
-        <rect x="98" y="55" width="14" height="75" fill="#c8f5b0"/>
-        <path d="M112 55 Q148 55 148 78 Q148 100 112 100" stroke="#c8f5b0" stroke-width="14" fill="none" stroke-linecap="round"/>
-        <text x="100" y="168" font-family="Montserrat,sans-serif" font-size="18" font-weight="700" fill="white" text-anchor="middle" letter-spacing="3">HANSAR</text>
-        <text x="100" y="192" font-family="Montserrat,sans-serif" font-size="22" font-weight="800" fill="white" text-anchor="middle" letter-spacing="4">PRINT</text>
+        <path d="M100 5 L195 45 L195 140 C195 185 155 218 100 228 C45 218 5 185 5 140 L5 45 Z" fill="#fff" stroke="#b8922a" stroke-width="6"/>
+        <path d="M100 5 L195 45 L195 140 C195 185 155 218 100 228 L100 145 Z" fill="#f5e9c8"/>
+        <rect x="62" y="55" width="14" height="75" fill="#b8922a"/>
+        <rect x="62" y="88" width="50" height="14" fill="#b8922a"/>
+        <rect x="98" y="55" width="14" height="75" fill="#b8922a"/>
+        <path d="M112 55 Q148 55 148 78 Q148 100 112 100" stroke="#b8922a" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <text x="100" y="168" font-family="Montserrat,sans-serif" font-size="18" font-weight="700" fill="#1a1410" text-anchor="middle" letter-spacing="3">HANSAR</text>
+        <text x="100" y="192" font-family="Montserrat,sans-serif" font-size="22" font-weight="800" fill="#1a1410" text-anchor="middle" letter-spacing="4">PRINT</text>
       </svg>
     </div>
   </div>
