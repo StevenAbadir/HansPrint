@@ -1241,7 +1241,14 @@ const translations = {
   }
 };
 
-let currentLang = 'de';
+// Sprache automatisch anhand Browser-Einstellung erkennen
+function detectLang() {
+  const browserLang = (navigator.language || navigator.userLanguage || 'de').toLowerCase();
+  if (browserLang.startsWith('ar')) return 'ar';
+  if (browserLang.startsWith('en')) return 'en';
+  return 'de';
+}
+let currentLang = detectLang();
 
 function setLang(lang) {
   currentLang = lang;
@@ -1319,6 +1326,9 @@ function polarPrev() { polarSlide((polarIdx+2)%3); }
     observer.observe(el);
   });
 })();
+
+// Sprache beim Laden setzen
+setLang(currentLang);
 </script>
 </body>
 </html>
