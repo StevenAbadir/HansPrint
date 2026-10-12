@@ -242,6 +242,21 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
 .foot-logo svg { height: 32px; width: auto; opacity: 0.8; }
 .foot-name { font-size: 0.9rem; font-weight: 700; color: rgba(255,255,255,0.7); }
 
+/* ── TEAM ── */
+.team-section { padding: 6rem 0; background: var(--gray-100); }
+.team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 900px; margin: 0 auto; }
+.team-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px; padding: 2rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: box-shadow 0.2s; }
+.team-card:hover { box-shadow: 0 8px 32px rgba(107,63,160,0.1); }
+.team-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--purple); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 700; flex-shrink: 0; letter-spacing: 0.05em; }
+.team-info { flex: 1; min-width: 0; }
+.team-role { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--purple); margin-bottom: 0.3rem; }
+.team-name { font-family: 'Lora', serif; font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 0.6rem; }
+.team-desc { font-size: 0.82rem; color: var(--gray-600); line-height: 1.6; margin-bottom: 1.25rem; }
+.team-contacts { display: flex; flex-direction: column; gap: 0.5rem; }
+.team-contact-link { display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; color: var(--gray-600); text-decoration: none; transition: color 0.2s; }
+.team-contact-link:hover { color: var(--purple); }
+.ticon { font-size: 0.9rem; min-width: 18px; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .hero-inner { grid-template-columns: 1fr; }
@@ -252,6 +267,8 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
   .steps::before { display: none; }
   .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
   .frow { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .team-card { flex-direction: column; }
   nav .nav-links { display: none; }
   .trust-bar { gap: 1.25rem; justify-content: flex-start; overflow-x: auto; }
   .lang-switcher { gap: 0.25rem; }
@@ -514,6 +531,60 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
   </div>
 </section>
 
+<!-- TEAM -->
+<section class="team-section" id="team">
+  <div class="section-wrap">
+    <div style="text-align:center; margin-bottom:3rem;">
+      <div class="section-eyebrow" data-i18n="team-eyebrow">Unser Team</div>
+      <h2 class="section-title" data-i18n="team-title">Direkt erreichbar für Sie</h2>
+      <p class="section-sub" style="margin:0 auto;" data-i18n="team-sub">Sprechen Sie unsere Mitarbeiter persönlich an – wir antworten schnell und unkompliziert.</p>
+    </div>
+    <div class="team-grid">
+
+      <!-- Osama Abadir -->
+      <div class="team-card">
+        <div class="team-avatar">OA</div>
+        <div class="team-info">
+          <div class="team-role" data-i18n="team-role1">Geschäftsinhaber</div>
+          <h3 class="team-name">Osama Abadir</h3>
+          <p class="team-desc" data-i18n="team-desc1">Für Informationen zu gekauften Maschinen und allgemeine Geschäftsanfragen.</p>
+          <div class="team-contacts">
+            <a class="team-contact-link" href="tel:+4917622325815">
+              <span class="ticon">📞</span>
+              <span>+49 172 6750875</span>
+            </a>
+            <a class="team-contact-link" href="mailto:osamahunser.de@gmail.com">
+              <span class="ticon">✉️</span>
+              <span>osamahunser.de@gmail.com</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Steven Abadir -->
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--green);">SA</div>
+        <div class="team-info">
+          <div class="team-role" data-i18n="team-role2">Mitarbeiter</div>
+          <h3 class="team-name">Steven Abadir</h3>
+          <p class="team-desc" data-i18n="team-desc2">Für Anfragen rund um Maschinen, Angebote und weiteren Support.</p>
+          <div class="team-contacts">
+            <a class="team-contact-link" href="tel:+4917622325815">
+              <span class="ticon">📞</span>
+              <span>+49 176 22325815</span>
+            </a>
+            <a class="team-contact-link" href="mailto:stevennassif88@gmail.com">
+              <span class="ticon">✉️</span>
+              <span>stevennassif88@gmail.com</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="contact" id="kontakt">
   <div class="section-wrap">
@@ -719,6 +790,13 @@ const translations = {
     'about-cta-title': 'Interesse? Wir freuen uns auf Ihre Anfrage.',
     'about-cta-desc': 'Sie möchten Druckmaschinen kaufen, Ihre Maschinen verkaufen oder eine komplette Druckerei auflösen?',
     'about-cta-btn': 'Jetzt Anfrage stellen',
+    'team-eyebrow': 'Unser Team',
+    'team-title': 'Direkt erreichbar für Sie',
+    'team-sub': 'Sprechen Sie unsere Mitarbeiter persönlich an – wir antworten schnell und unkompliziert.',
+    'team-role1': 'Geschäftsinhaber',
+    'team-desc1': 'Für Informationen zu gekauften Maschinen und allgemeine Geschäftsanfragen.',
+    'team-role2': 'Mitarbeiter',
+    'team-desc2': 'Für Anfragen rund um Maschinen, Angebote und weiteren Support.',
   },
   en: {
     'nav-sub': 'Printing Machines',
@@ -850,6 +928,13 @@ const translations = {
     'about-cta-title': 'Interested? We look forward to your inquiry.',
     'about-cta-desc': 'Looking to buy printing machines, sell your machines, or liquidate an entire print shop?',
     'about-cta-btn': 'Send an inquiry',
+    'team-eyebrow': 'Our Team',
+    'team-title': 'Reach Us Directly',
+    'team-sub': 'Contact our team members personally – we respond quickly and without complications.',
+    'team-role1': 'Owner',
+    'team-desc1': 'For information about purchased machines and general business inquiries.',
+    'team-role2': 'Staff',
+    'team-desc2': 'For inquiries about machines, quotes and further support.',
   },
   ar: {
     'nav-sub': 'آلات الطباعة',
@@ -981,6 +1066,13 @@ const translations = {
     'about-cta-title': 'مهتم؟ نتطلع إلى استفساراتكم.',
     'about-cta-desc': 'هل تريد شراء آلات طباعة، أو بيع آلاتك، أو تصفية مطبعة كاملة؟',
     'about-cta-btn': 'أرسل استفساراً',
+    'team-eyebrow': 'فريقنا',
+    'team-title': 'تواصل معنا مباشرة',
+    'team-sub': 'تواصل مع أعضاء فريقنا شخصياً – نرد بسرعة وبدون تعقيد.',
+    'team-role1': 'صاحب العمل',
+    'team-desc1': 'للحصول على معلومات حول الآلات المشتراة والاستفسارات التجارية العامة.',
+    'team-role2': 'موظف',
+    'team-desc2': 'للاستفسار عن الآلات والعروض والدعم.',
   }
 };
 
