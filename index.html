@@ -36,8 +36,17 @@ body {
   overflow-x: hidden;
 }
 
-/* RTL support for Arabic */
-html[dir="rtl"] body { font-family: 'Montserrat', Arial, sans-serif; }
+/* Arabic: nur Text-Ausrichtung, kein Layout-Spiegeln */
+body.lang-ar { font-family: 'Montserrat', Arial, sans-serif; }
+body.lang-ar p,
+body.lang-ar h1, body.lang-ar h2, body.lang-ar h3, body.lang-ar h4,
+body.lang-ar .section-eyebrow, body.lang-ar .section-sub,
+body.lang-ar li, body.lang-ar label, body.lang-ar .feat p,
+body.lang-ar .ankauf-item-text, body.lang-ar .rev-text,
+body.lang-ar .step-desc, body.lang-ar .about-text p {
+  text-align: right;
+  direction: rtl;
+}
 
 /* ── NAV ── */
 nav {
@@ -1187,7 +1196,9 @@ function setLang(lang) {
   const isRtl = lang === 'ar';
 
   document.documentElement.lang = lang;
-  document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+  // Kein dir="rtl" – Layout bleibt symmetrisch, nur Text-Richtung ändert sich
+  document.body.classList.remove('lang-ar');
+  if (isRtl) document.body.classList.add('lang-ar');
 
   // Update all translatable elements
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -1207,10 +1218,6 @@ function setLang(lang) {
     if (btn.getAttribute('data-lang') === lang) btn.classList.add('active');
   });
 
-  // RTL adjustments
-  if (isRtl) {
-    document.body.style.fontFamily = "'Montserrat', Arial, sans-serif";
-  }
 }
 // ── HAMBURGER MENU ──
 function toggleMenu() {
