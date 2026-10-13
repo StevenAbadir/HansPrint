@@ -575,17 +575,14 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
           <div class="mcard-maker">Polar Mohr</div>
           <div class="mcard-name">76 EM</div>
           <div class="mspecs">
-            <div class="mspec"><strong>Baujahr</strong>1989</div>
-            <div class="mspec"><strong>Schnittbreite</strong>76 cm</div>
-            <div class="mspec"><strong>Zustand</strong>Gut</div>
-            <div class="mspec"><strong>Typ</strong>Schneidemaschine</div>
+            <div class="mspec"><strong>76 cm</strong><span data-i18n="spec-cut">Schnittbreite</span></div>
+            <div class="mspec"><strong>EM</strong><span data-i18n="spec-type">Typ</span></div>
+            <div class="mspec"><strong>1989</strong><span data-i18n="spec-year">Baujahr</span></div>
+            <div class="mspec"><strong><span data-i18n="spec-cond-gut">Gut</span></strong><span data-i18n="spec-condlabel">Zustand</span></div>
           </div>
           <div class="mcard-foot">
-            <div>
-              <div class="mprice-label">Preis</div>
-              <div class="mprice">Auf Anfrage</div>
-            </div>
-            <a href="#kontakt" class="mcta">Anfragen →</a>
+            <div><div class="mprice" data-i18n="on-request">Auf Anfrage</div><div class="mprice-label" data-i18n="plus-tax">zzgl. MwSt. + Transport</div></div>
+            <a href="#kontakt" class="mcta" data-i18n="inquire">Anfragen →</a>
           </div>
         </div>
       </div>
@@ -927,6 +924,7 @@ const translations = {
     'spec-prog': 'Programm',
     'spec-type': 'Typ',
     'spec-cond': 'Sehr gut',
+    'spec-cond-gut': 'Gut',
     'spec-condlabel': 'Zustand',
     'buy-eyebrow': 'Maschinenankauf',
     'buy-title': 'Wir kaufen Ihre Druckmaschine',
@@ -1065,6 +1063,7 @@ const translations = {
     'spec-prog': 'Programmatic',
     'spec-type': 'Type',
     'spec-cond': 'Very Good',
+    'spec-cond-gut': 'Good',
     'spec-condlabel': 'Condition',
     'buy-eyebrow': 'Machine Purchase',
     'buy-title': 'We Buy Your Printing Machine',
@@ -1203,6 +1202,7 @@ const translations = {
     'spec-prog': 'برمجي',
     'spec-type': 'النوع',
     'spec-cond': 'ممتاز',
+    'spec-cond-gut': 'جيد',
     'spec-condlabel': 'الحالة',
     'buy-eyebrow': 'شراء الآلات',
     'buy-title': 'نشتري آلة الطباعة الخاصة بك',
