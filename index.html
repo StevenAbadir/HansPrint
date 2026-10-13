@@ -557,6 +557,39 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
     </div>
     <div class="mgrid" id="mgrid">
 
+      <!-- Polar Mohr 76 EM -->
+      <div class="mcard scroll-fade" data-cat="weiter">
+        <div class="mcard-img" style="height:240px; position:relative; overflow:hidden; background:#1a1a18;">
+          <div style="position:absolute;inset:0;overflow:hidden;">
+            <div id="polar76-slides" style="display:flex; width:300%; height:100%; transition:transform 0.4s ease;">
+              <div style="width:33.333%; flex-shrink:0; height:100%;"><img src="img/polar-76em-1.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Polar Mohr 76 EM"></div>
+              <div style="width:33.333%; flex-shrink:0; height:100%;"><img src="img/polar-76em-2.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Polar Mohr 76 EM"></div>
+              <div style="width:33.333%; flex-shrink:0; height:100%;"><img src="img/polar-76em-3.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Polar Mohr 76 EM Typenschild"></div>
+            </div>
+          </div>
+          <button onclick="slideCard('polar76-slides',-1)" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.45);color:#fff;border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:1rem;">‹</button>
+          <button onclick="slideCard('polar76-slides',1)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.45);color:#fff;border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:1rem;">›</button>
+          <div class="mbadge avail">Verfügbar</div>
+        </div>
+        <div class="mcard-body">
+          <div class="mcard-maker">Polar Mohr</div>
+          <div class="mcard-name">76 EM</div>
+          <div class="mspecs">
+            <div class="mspec"><strong>Baujahr</strong>1989</div>
+            <div class="mspec"><strong>Schnittbreite</strong>76 cm</div>
+            <div class="mspec"><strong>Zustand</strong>Gut</div>
+            <div class="mspec"><strong>Typ</strong>Schneidemaschine</div>
+          </div>
+          <div class="mcard-foot">
+            <div>
+              <div class="mprice-label">Preis</div>
+              <div class="mprice">Auf Anfrage</div>
+            </div>
+            <a href="#kontakt" class="mcta">Anfragen →</a>
+          </div>
+        </div>
+      </div>
+
       <div class="mcard polar-card scroll-fade" data-cat="weiter">
         <div class="mcard-img polar-img" style="height:240px; position:relative; overflow:hidden; background:#1a1a18; clip-path:inset(0);">
           <!-- Image slider -->
@@ -1307,6 +1340,16 @@ document.addEventListener('click', function(e) {
   const nav = document.querySelector('nav');
   if (!nav.contains(e.target)) closeMenu();
 });
+
+// ── GENERIC CARD SLIDER ──
+var slideIdxMap = {};
+function slideCard(id, dir) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var count = el.children.length;
+  slideIdxMap[id] = ((slideIdxMap[id] || 0) + dir + count) % count;
+  el.style.transform = 'translateX(-' + (slideIdxMap[id] * (100/count)) + '%)';
+}
 
 // ── POLAR SLIDER ──
 var polarIdx = 0;
