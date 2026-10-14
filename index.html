@@ -89,7 +89,7 @@ body.lang-ar .step-desc, body.lang-ar .about-text p {
 
 /* ── NAV ── */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  position: fixed; top: 15px; left: 0; right: 0; z-index: 199;
   background: var(--white);
   border-bottom: 1px solid var(--gray-200);
   display: flex; align-items: center; justify-content: space-between;
@@ -126,7 +126,7 @@ nav {
   min-height: 100vh;
   background: linear-gradient(160deg, #fffdf7 0%, #f9f3e4 100%);
   display: flex; align-items: center;
-  padding: 100px 5vw 60px;
+  padding: 115px 5vw 60px;
   position: relative; overflow: hidden;
 }
 .hero::before {
@@ -164,7 +164,7 @@ nav {
 .trust-item { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.9); display: flex; align-items: center; gap: 0.5rem; }
 .trust-item::before { content: '✓'; font-size: 0.9rem; font-weight: 800; }
 /* Germany flag bar */
-.de-flag-bar { display: flex; flex-direction: column; width: 100%; position: relative; z-index: 200; }
+.de-flag-bar { display: flex; flex-direction: column; width: 100%; position: fixed; top: 0; left: 0; right: 0; z-index: 201; }
 .de-flag-stripe { height: 5px; width: 100%; }
 .de-black { background: #222; animation: flagwave 4s ease-in-out infinite; }
 .de-red   { background: #DD0000; animation: flagwave 4s ease-in-out infinite 0.15s; }
