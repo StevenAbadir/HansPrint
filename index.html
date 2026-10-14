@@ -377,6 +377,15 @@ nav {
   .lager-next { right: 8px; }
 }
 
+/* FORM TABS */
+.form-tabs { display: flex; gap: 0; margin-bottom: 1.75rem; border-radius: 8px; overflow: hidden; border: 1.5px solid rgba(184,146,42,0.3); }
+.form-tab { flex: 1; padding: 0.75rem 1rem; background: transparent; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; color: rgba(255,255,255,0.5); transition: background 0.2s, color 0.2s; }
+.form-tab:first-child { border-right: 1px solid rgba(184,146,42,0.3); }
+.form-tab.active { background: var(--purple); color: #fff; }
+.form-tab:not(.active):hover { background: rgba(184,146,42,0.1); color: rgba(255,255,255,0.8); }
+.search-intro { background: rgba(184,146,42,0.1); border-left: 3px solid var(--purple); border-radius: 0 6px 6px 0; padding: 0.85rem 1rem; margin-bottom: 1.25rem; }
+.search-intro p { font-size: 0.88rem; color: rgba(255,255,255,0.75); line-height: 1.6; margin: 0; }
+
 .contact { background: var(--gray-800); padding: 6rem 0; }
 .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
 .contact .section-eyebrow { color: #e2bc50; }
@@ -1308,7 +1317,15 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
         </div>
       </div>
       <div>
+        <!-- TABS -->
+        <div class="form-tabs">
+          <button class="form-tab active" onclick="switchTab('buy',this)" data-i18n="tab-buy">🔍 Maschine anfragen</button>
+          <button class="form-tab" onclick="switchTab('search',this)" data-i18n="tab-search">🎯 Wir suchen für Sie</button>
+        </div>
+
+        <!-- TAB 1: Maschine kaufen -->
         <form class="cform" id="cform" action="https://formspree.io/f/xgaozpba" method="POST">
+          <input type="hidden" name="_subject" value="Maschinenankauf-Anfrage – HansarPrint">
           <div class="frow">
             <div class="fgroup"><label data-i18n="form-first">Vorname</label><input type="text" name="vorname" placeholder="Max" required></div>
             <div class="fgroup"><label data-i18n="form-last">Nachname</label><input type="text" name="nachname" placeholder="Mustermann" required></div>
@@ -1332,6 +1349,61 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
           <div class="fgroup"><label data-i18n="form-msg">Nachricht</label><textarea rows="4" name="nachricht" placeholder="Teilen Sie uns Ihre Anforderungen mit…"></textarea></div>
           <button type="submit" class="btn-green" data-i18n="form-submit">Anfrage absenden</button>
         </form>
+
+        <!-- TAB 2: Wir suchen für Sie -->
+        <form class="cform" id="cform-search" action="https://formspree.io/f/xgaozpba" method="POST" style="display:none;">
+          <input type="hidden" name="_subject" value="Maschinengesuch – HansarPrint">
+          <input type="hidden" name="anfrage_typ" value="Maschinengesuch">
+          <div class="search-intro">
+            <p data-i18n="search-intro">Sie suchen eine bestimmte Maschine? Beschreiben Sie uns Ihre Anforderungen — wir durchsuchen unser Netzwerk und finden das Richtige für Sie.</p>
+          </div>
+          <div class="frow">
+            <div class="fgroup"><label data-i18n="form-first">Vorname</label><input type="text" name="vorname" placeholder="Max" required></div>
+            <div class="fgroup"><label data-i18n="form-last">Nachname</label><input type="text" name="nachname" placeholder="Mustermann" required></div>
+          </div>
+          <div class="fgroup"><label data-i18n="form-email">E-Mail</label><input type="email" name="email" placeholder="max@druckerei.de" required></div>
+          <div class="fgroup"><label data-i18n="form-phone">Telefon (optional)</label><input type="tel" name="telefon" placeholder="+49 …"></div>
+          <div class="fgroup">
+            <label data-i18n="search-type">Maschinentyp</label>
+            <select name="maschinentyp" required>
+              <option value="" data-i18n="form-select">Bitte wählen…</option>
+              <option data-i18n="search-opt-offset">Bogenoffset-Maschine</option>
+              <option data-i18n="search-opt-cut">Schneidemaschine / Polar</option>
+              <option data-i18n="search-opt-fold">Falzmaschine</option>
+              <option data-i18n="search-opt-crease">Rilsmaschine / Stanzmaschine</option>
+              <option data-i18n="search-opt-large">Großformatdruck</option>
+              <option data-i18n="search-opt-other">Sonstiges</option>
+            </select>
+          </div>
+          <div class="fgroup">
+            <label data-i18n="search-brand">Hersteller / Modell (falls bekannt)</label>
+            <input type="text" name="hersteller" placeholder="z.B. Heidelberg SM 52, Polar 115…">
+          </div>
+          <div class="fgroup">
+            <label data-i18n="search-budget">Budget (ca.)</label>
+            <select name="budget">
+              <option value="" data-i18n="form-select">Bitte wählen…</option>
+              <option>Bis 5.000 €</option>
+              <option>5.000 – 15.000 €</option>
+              <option>15.000 – 30.000 €</option>
+              <option>30.000 – 60.000 €</option>
+              <option>Über 60.000 €</option>
+              <option data-i18n="search-budget-open">Auf Anfrage</option>
+            </select>
+          </div>
+          <div class="fgroup">
+            <label data-i18n="search-urgency">Dringlichkeit</label>
+            <select name="dringlichkeit">
+              <option value="" data-i18n="form-select">Bitte wählen…</option>
+              <option data-i18n="search-urg-soon">So schnell wie möglich</option>
+              <option data-i18n="search-urg-month">Innerhalb eines Monats</option>
+              <option data-i18n="search-urg-flex">Flexibel / kein Eildruck</option>
+            </select>
+          </div>
+          <div class="fgroup"><label data-i18n="search-notes">Weitere Anforderungen</label><textarea rows="3" name="anforderungen" placeholder="z.B. Baujahr, Zustand, Farben, Formate…"></textarea></div>
+          <button type="submit" class="btn-green" data-i18n="search-submit">Gesuch absenden</button>
+        </form>
+
         <div class="form-thanks" id="fthx" style="display:none;">
           <div class="big" data-i18n="thanks-title">✓ Vielen Dank!</div>
           <p data-i18n="thanks-desc">Ihre Anfrage ist bei uns eingegangen. Wir melden uns in der Regel innerhalb von 24 Stunden persönlich bei Ihnen.</p>
@@ -1383,6 +1455,15 @@ function filter(cat, btn) {
   btn.classList.add('active');
   activeFilterCat = cat;
   applyFilters();
+}
+
+// FORM TABS
+function switchTab(tab, btn) {
+  document.querySelectorAll('.form-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('cform').style.display = tab === 'buy' ? '' : 'none';
+  document.getElementById('cform-search').style.display = tab === 'search' ? '' : 'none';
+  document.getElementById('fthx').style.display = 'none';
 }
 
 // LAGER SLIDER
@@ -1564,6 +1645,25 @@ const translations = {
     'form-general': 'Andere / Allgemeine Anfrage',
     'form-msg': 'Nachricht',
     'form-submit': 'Anfrage absenden',
+    'tab-buy': '🔍 Maschine anfragen',
+    'tab-search': '🎯 Wir suchen für Sie',
+    'search-intro': 'Sie suchen eine bestimmte Maschine? Beschreiben Sie uns Ihre Anforderungen — wir durchsuchen unser Netzwerk und finden das Richtige für Sie.',
+    'search-type': 'Maschinentyp',
+    'search-opt-offset': 'Bogenoffset-Maschine',
+    'search-opt-cut': 'Schneidemaschine / Polar',
+    'search-opt-fold': 'Falzmaschine',
+    'search-opt-crease': 'Rilsmaschine / Stanzmaschine',
+    'search-opt-large': 'Großformatdruck',
+    'search-opt-other': 'Sonstiges',
+    'search-brand': 'Hersteller / Modell (falls bekannt)',
+    'search-budget': 'Budget (ca.)',
+    'search-budget-open': 'Auf Anfrage',
+    'search-urgency': 'Dringlichkeit',
+    'search-urg-soon': 'So schnell wie möglich',
+    'search-urg-month': 'Innerhalb eines Monats',
+    'search-urg-flex': 'Flexibel / kein Eildruck',
+    'search-notes': 'Weitere Anforderungen',
+    'search-submit': 'Gesuch absenden',
     'thanks-title': '✓ Vielen Dank!',
     'thanks-desc': 'Ihre Anfrage ist bei uns eingegangen. Wir melden uns in der Regel innerhalb von 24 Stunden persönlich bei Ihnen.',
     'foot-sub': 'Gebrauchte Druckmaschinen',
@@ -1713,6 +1813,25 @@ const translations = {
     'form-general': 'Other / General Enquiry',
     'form-msg': 'Message',
     'form-submit': 'Send Enquiry',
+    'tab-buy': '🔍 Request a Machine',
+    'tab-search': '🎯 We Find It for You',
+    'search-intro': 'Looking for a specific machine? Describe your requirements — we will search our network and find the right one for you.',
+    'search-type': 'Machine Type',
+    'search-opt-offset': 'Sheet-fed Offset Machine',
+    'search-opt-cut': 'Cutting Machine / Polar',
+    'search-opt-fold': 'Folding Machine',
+    'search-opt-crease': 'Creasing / Die-cutting Machine',
+    'search-opt-large': 'Large Format Printing',
+    'search-opt-other': 'Other',
+    'search-brand': 'Manufacturer / Model (if known)',
+    'search-budget': 'Budget (approx.)',
+    'search-budget-open': 'On Request',
+    'search-urgency': 'Urgency',
+    'search-urg-soon': 'As soon as possible',
+    'search-urg-month': 'Within one month',
+    'search-urg-flex': 'Flexible / no rush',
+    'search-notes': 'Further Requirements',
+    'search-submit': 'Submit Search Request',
     'thanks-title': '✓ Thank You!',
     'thanks-desc': 'Your enquiry has been received. We will get back to you personally within 24 hours.',
     'foot-sub': 'Used Printing Machines',
@@ -1862,6 +1981,25 @@ const translations = {
     'form-general': 'استفسار آخر / عام',
     'form-msg': 'الرسالة',
     'form-submit': 'إرسال الاستفسار',
+    'tab-buy': '🔍 طلب آلة',
+    'tab-search': '🎯 نحن نبحث لك',
+    'search-intro': 'هل تبحث عن آلة معينة؟ صف لنا متطلباتك — سنبحث في شبكتنا ونجد الآلة المناسبة لك.',
+    'search-type': 'نوع الآلة',
+    'search-opt-offset': 'آلة أوفست',
+    'search-opt-cut': 'آلة قطع / بولار',
+    'search-opt-fold': 'آلة طي',
+    'search-opt-crease': 'آلة كبس / قطع بالقالب',
+    'search-opt-large': 'طباعة كبيرة الحجم',
+    'search-opt-other': 'أخرى',
+    'search-brand': 'الشركة المصنعة / الموديل (إن كان معروفاً)',
+    'search-budget': 'الميزانية (تقريباً)',
+    'search-budget-open': 'عند الطلب',
+    'search-urgency': 'مدى الإلحاح',
+    'search-urg-soon': 'في أقرب وقت ممكن',
+    'search-urg-month': 'خلال شهر',
+    'search-urg-flex': 'مرن / لا يوجد عجلة',
+    'search-notes': 'متطلبات إضافية',
+    'search-submit': 'إرسال الطلب',
     'thanks-title': '✓ شكراً جزيلاً!',
     'thanks-desc': 'تم استلام استفسارك. سنتواصل معك شخصيًا في غضون 24 ساعة.',
     'foot-sub': 'آلات طباعة مستعملة',
