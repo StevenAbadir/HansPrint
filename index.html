@@ -67,7 +67,7 @@
   --ink: #1c1c1a;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: 'Montserrat', sans-serif;
@@ -542,6 +542,8 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
   .trust-bar { gap: 1.25rem; justify-content: flex-start; overflow-x: auto; }
   .lang-switcher { gap: 0.25rem; }
   .lang-btn { padding: 0.25rem 0.45rem; font-size: 0.65rem; }
+  .feat-grid { grid-template-columns: 1fr; }
+  .section-wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
 }
 @media (min-width: 769px) {
   .hamburger { display: none; }
