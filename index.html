@@ -1225,17 +1225,42 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
     <!-- SLIDER -->
     <div class="lager-slider-wrap scroll-fade d2">
       <div class="lager-slider" id="lagerSlider">
-        <!-- Slide 1: Osama Kalmar Stapler -->
+        <!-- Slide 1: Container innen -->
+        <div class="lager-slide">
+          <img src="img/logistik-container-innen.png" alt="Maschinen werden in Container verladen">
+        </div>
+        <!-- Slide 2: Linde Stapler in Halle -->
+        <div class="lager-slide">
+          <img src="img/logistik-linde-halle.jpg" alt="Linde Stapler in Lagerhalle">
+        </div>
+        <!-- Slide 3: Sattelzug mit Maschinen -->
+        <div class="lager-slide">
+          <img src="img/logistik-sattelzug.jpg" alt="Sattelzug mit verpackten Maschinen">
+        </div>
+        <!-- Slide 4: Linde + roter LKW -->
+        <div class="lager-slide">
+          <img src="img/logistik-linde-truck.jpg" alt="Linde Stapler lädt Maschine auf LKW">
+        </div>
+        <!-- Slide 5: Flatbed LKW -->
+        <div class="lager-slide">
+          <img src="img/logistik-flatbed.jpg" alt="Druckmaschinen auf Flatbed LKW">
+        </div>
+        <!-- Slide 6: Osama mit Staplern -->
+        <div class="lager-slide">
+          <img src="img/logistik-osama-stapler.jpg" alt="Osama Abadir bei Maschinenübergabe">
+          <div class="lager-nametag">O. Abadir</div>
+        </div>
+        <!-- Slide 7: Osama Kalmar -->
         <div class="lager-slide">
           <img src="img/logistik-osama-kalmar.png" alt="Osama Abadir Kalmar Stapler">
           <div class="lager-nametag">O. Abadir</div>
         </div>
-        <!-- Slide 2: Osama D-TEC Container -->
+        <!-- Slide 8: Osama D-TEC -->
         <div class="lager-slide">
           <img src="img/logistik-osama-dtec.png" alt="Osama Abadir D-TEC Container">
           <div class="lager-nametag">O. Abadir</div>
         </div>
-        <!-- Slide 3: Gelber Stapler -->
+        <!-- Slide 9: Gelber Stapler -->
         <div class="lager-slide">
           <img src="img/logistik-forklift.png" alt="Stapler lädt Druckmaschine">
         </div>
@@ -1249,6 +1274,12 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
       <span class="lager-dot active" onclick="lagerGoTo(0)"></span>
       <span class="lager-dot" onclick="lagerGoTo(1)"></span>
       <span class="lager-dot" onclick="lagerGoTo(2)"></span>
+      <span class="lager-dot" onclick="lagerGoTo(3)"></span>
+      <span class="lager-dot" onclick="lagerGoTo(4)"></span>
+      <span class="lager-dot" onclick="lagerGoTo(5)"></span>
+      <span class="lager-dot" onclick="lagerGoTo(6)"></span>
+      <span class="lager-dot" onclick="lagerGoTo(7)"></span>
+      <span class="lager-dot" onclick="lagerGoTo(8)"></span>
     </div>
   </div>
 </section>
@@ -1356,7 +1387,7 @@ function filter(cat, btn) {
 
 // LAGER SLIDER
 var lagerIndex = 0;
-var lagerTotal = 3;
+var lagerTotal = 9;
 var lagerAutoTimer = null;
 
 function lagerGoTo(n) {
