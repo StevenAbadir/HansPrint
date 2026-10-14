@@ -286,6 +286,62 @@ nav {
 .step-desc { font-size: 0.78rem; color: var(--gray-600); line-height: 1.5; }
 
 /* ── CONTACT ── */
+/* LAGER SECTION */
+.lager-section { background: #111110; padding: 6rem 0 5rem; }
+.lager-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.lager-card {
+  border-radius: 6px;
+  overflow: hidden;
+  background: #1a1a18;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.45);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.lager-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,0.6); }
+.lager-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+}
+.lager-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: contrast(1.05) brightness(1.02);
+  transition: transform 0.5s ease;
+}
+.lager-card:hover .lager-img-wrap img { transform: scale(1.04); }
+.lager-nametag {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(184,146,42,0.92);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.75rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+@media (max-width: 700px) {
+  .lager-grid { grid-template-columns: repeat(2, 1fr); gap: 0.65rem; }
+}
+@media (max-width: 420px) {
+  .lager-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+}
+
 .contact { background: var(--gray-800); padding: 6rem 0; }
 .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
 .contact .section-eyebrow { color: #e2bc50; }
@@ -466,6 +522,7 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
   <div class="nav-right">
     <ul class="nav-links" id="nav-links">
       <li><a href="#maschinen" data-i18n="nav-machines" onclick="closeMenu()">Maschinen</a></li>
+      <li><a href="#lager" data-i18n="nav-lager" onclick="closeMenu()">Lager</a></li>
       <li><a href="#ankauf" data-i18n="nav-ankauf" onclick="closeMenu()">Ankauf</a></li>
       <li><a href="#ueber" data-i18n="nav-about" onclick="closeMenu()">Über uns</a></li>
       <li><a href="#kontakt" class="nav-cta" data-i18n="nav-cta" onclick="closeMenu()">Anfrage</a></li>
@@ -1121,6 +1178,64 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
   </div>
 </section>
 
+<!-- LAGER & LOGISTIK GALERIE -->
+<section class="lager-section" id="lager">
+  <div class="section-wrap">
+    <p class="section-eyebrow scroll-fade" data-i18n="lager-eye">Lager &amp; Logistik</p>
+    <h2 class="section-title scroll-left d1" data-i18n="lager-title">Einblick in unseren Bestand</h2>
+    <p class="section-sub scroll-fade d2" data-i18n="lager-sub">Hunderte gebrauchte Druckmaschinen — sicher gelagert, fachgerecht verpackt und bereit für den weltweiten Versand.</p>
+
+    <div class="lager-grid">
+
+      <!-- Foto 1: Osama close-up — NAME TAG -->
+      <div class="lager-card scroll-fade">
+        <div class="lager-img-wrap">
+          <img src="img/lager-osama-close.png" alt="Osama Abadir im Lager" loading="lazy">
+          <div class="lager-nametag">O. Abadir</div>
+        </div>
+      </div>
+
+      <!-- Foto 2: Halle Übersicht mit Kranbalken -->
+      <div class="lager-card scroll-fade d1">
+        <div class="lager-img-wrap">
+          <img src="img/lager-halle-overview.png" alt="Lagerhalle Übersicht" loading="lazy">
+        </div>
+      </div>
+
+      <!-- Foto 3: Halle Perspektive -->
+      <div class="lager-card scroll-fade d2">
+        <div class="lager-img-wrap">
+          <img src="img/lager-halle-perspektive.png" alt="Lagerhalle Maschinenbestand" loading="lazy">
+        </div>
+      </div>
+
+      <!-- Foto 4: Osama Overview — NAME TAG -->
+      <div class="lager-card scroll-fade d1">
+        <div class="lager-img-wrap">
+          <img src="img/lager-osama-overview.png" alt="Osama Abadir Lagerhalle" loading="lazy">
+          <div class="lager-nametag">O. Abadir</div>
+        </div>
+      </div>
+
+      <!-- Foto 5: Logistik Container Truck -->
+      <div class="lager-card scroll-fade d2">
+        <div class="lager-img-wrap">
+          <img src="img/logistik-container-truck.png" alt="Containertransport" loading="lazy">
+        </div>
+      </div>
+
+      <!-- Foto 6: Osama Kalmar Forklift — NAME TAG -->
+      <div class="lager-card scroll-fade">
+        <div class="lager-img-wrap">
+          <img src="img/logistik-osama-kalmar.png" alt="Osama Abadir Kalmar Stapler" loading="lazy">
+          <div class="lager-nametag">O. Abadir</div>
+        </div>
+      </div>
+
+    </div><!-- /lager-grid -->
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="contact" id="kontakt">
   <div class="section-wrap">
@@ -1242,6 +1357,7 @@ const translations = {
   de: {
     'nav-sub': 'Druckmaschinen',
     'nav-machines': 'Maschinen',
+    'nav-lager': 'Lager',
     'nav-ankauf': 'Ankauf',
     'nav-reviews': 'Bewertungen',
     'nav-about': 'Über uns',
@@ -1306,6 +1422,9 @@ const translations = {
     'spec-colors': 'Farben',
     'spec-prints': 'Drucke',
     'spec-condlabel': 'Zustand',
+    'lager-eye': 'Lager &amp; Logistik',
+    'lager-title': 'Einblick in unseren Bestand',
+    'lager-sub': 'Hunderte gebrauchte Druckmaschinen — sicher gelagert, fachgerecht verpackt und bereit für den weltweiten Versand.',
     'buy-eyebrow': 'Maschinenankauf',
     'buy-title': 'Wir kaufen Ihre Druckmaschine',
     'buy-sub': 'Sie möchten eine Maschine verkaufen? HansarPrint kauft gebrauchte Druckmaschinen aller namhaften Hersteller – schnell, unkompliziert und zum fairen Marktpreis.',
@@ -1387,6 +1506,7 @@ const translations = {
   en: {
     'nav-sub': 'Printing Machines',
     'nav-machines': 'Machines',
+    'nav-lager': 'Warehouse',
     'nav-ankauf': 'We Buy',
     'nav-reviews': 'Reviews',
     'nav-about': 'About',
@@ -1451,6 +1571,9 @@ const translations = {
     'spec-colors': 'Colors',
     'spec-prints': 'Impressions',
     'spec-condlabel': 'Condition',
+    'lager-eye': 'Warehouse &amp; Logistics',
+    'lager-title': 'A Look at Our Stock',
+    'lager-sub': 'Hundreds of used printing machines — safely stored, professionally packed and ready for worldwide shipping.',
     'buy-eyebrow': 'Machine Purchase',
     'buy-title': 'We Buy Your Printing Machine',
     'buy-sub': 'Looking to sell a machine? HansarPrint buys used printing machines from all major manufacturers – quickly, easily and at a fair market price.',
@@ -1532,6 +1655,7 @@ const translations = {
   ar: {
     'nav-sub': 'آلات الطباعة',
     'nav-machines': 'الآلات',
+    'nav-lager': 'المستودع',
     'nav-ankauf': 'شراء',
     'nav-reviews': 'التقييمات',
     'nav-about': 'عنا',
@@ -1596,6 +1720,9 @@ const translations = {
     'spec-colors': 'ألوان',
     'spec-prints': 'طبعة',
     'spec-condlabel': 'الحالة',
+    'lager-eye': 'المستودع والخدمات اللوجستية',
+    'lager-title': 'نظرة على مخزوننا',
+    'lager-sub': 'مئات من آلات الطباعة المستعملة — مخزنة بأمان، معبأة باحتراف وجاهزة للشحن في جميع أنحاء العالم.',
     'buy-eyebrow': 'شراء الآلات',
     'buy-title': 'نشتري آلة الطباعة الخاصة بك',
     'buy-sub': 'هل تريد بيع آلة؟ HansarPrint يشتري آلات الطباعة المستعملة من جميع الشركات المصنعة الكبرى – بسرعة وسهولة وبسعر عادل.',
