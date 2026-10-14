@@ -291,59 +291,97 @@ nav {
 .lager-section { background: #ffffff !important; padding: 6rem 0 5rem; }
 .lager-section .section-title { color: var(--ink); }
 .lager-section .section-sub { color: var(--gray-600); }
-.lager-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-top: 3rem;
-}
-.lager-card {
-  border-radius: 10px;
-  overflow: hidden;
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.lager-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.12); }
-.lager-img-wrap {
+
+/* SLIDER */
+.lager-slider-wrap {
   position: relative;
-  width: 100%;
-  aspect-ratio: 3/4;
+  margin-top: 3rem;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.13);
+  background: #111;
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.lager-slider {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+.lager-slide {
+  min-width: 100%;
+  position: relative;
+  aspect-ratio: 16/10;
   overflow: hidden;
 }
-.lager-img-wrap img {
+.lager-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
   display: block;
-  filter: contrast(1.05) brightness(1.04);
-  transition: transform 0.5s ease;
+  filter: contrast(1.05) brightness(1.03);
 }
-.lager-card:hover .lager-img-wrap img { transform: scale(1.04); }
 .lager-nametag {
   position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 16px;
+  left: 20px;
   background: rgba(184,146,42,0.93);
   color: #fff;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 0.3rem 0.75rem;
-  border-radius: 3px;
+  padding: 0.35rem 0.85rem;
+  border-radius: 4px;
   white-space: nowrap;
   backdrop-filter: blur(4px);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
-@media (max-width: 700px) {
-  .lager-grid { grid-template-columns: repeat(2, 1fr); gap: 0.65rem; }
+.lager-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.92);
+  border: none;
+  border-radius: 50%;
+  width: 44px; height: 44px;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  transition: background 0.2s, transform 0.2s;
+  z-index: 10;
+  color: var(--ink);
+  padding-bottom: 2px;
 }
-@media (max-width: 420px) {
-  .lager-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.lager-arrow:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+.lager-prev { left: 14px; }
+.lager-next { right: 14px; }
+.lager-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 7px;
+  z-index: 10;
+}
+.lager-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.45);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  border: 1.5px solid rgba(255,255,255,0.6);
+}
+.lager-dot.active { background: var(--purple); border-color: var(--purple); transform: scale(1.2); }
+@media (max-width: 600px) {
+  .lager-arrow { width: 36px; height: 36px; font-size: 1.2rem; }
+  .lager-prev { left: 8px; }
+  .lager-next { right: 8px; }
 }
 
 .contact { background: var(--gray-800); padding: 6rem 0; }
@@ -1189,54 +1227,50 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
     <h2 class="section-title scroll-left d1" data-i18n="lager-title">Einblick in unseren Bestand</h2>
     <p class="section-sub scroll-fade d2" data-i18n="lager-sub">Hunderte gebrauchte Druckmaschinen — sicher gelagert, fachgerecht verpackt und bereit für den weltweiten Versand.</p>
 
-    <div class="lager-grid">
-
-      <!-- Foto 1: Osama close-up — NAME TAG -->
-      <div class="lager-card scroll-fade">
-        <div class="lager-img-wrap">
-          <img src="img/lager-osama-close.png" alt="Osama Abadir im Lager" loading="lazy">
+    <!-- SLIDER -->
+    <div class="lager-slider-wrap scroll-fade d2">
+      <div class="lager-slider" id="lagerSlider">
+        <!-- Slide 1: Osama close -->
+        <div class="lager-slide">
+          <img src="img/lager-osama-close.png" alt="Osama Abadir im Lager">
+          <div class="lager-nametag">O. Abadir</div>
+        </div>
+        <!-- Slide 2: Halle Übersicht -->
+        <div class="lager-slide">
+          <img src="img/lager-halle-overview.png" alt="Lagerhalle Übersicht">
+        </div>
+        <!-- Slide 3: Halle Perspektive -->
+        <div class="lager-slide">
+          <img src="img/lager-halle-perspektive.png" alt="Lagerhalle Maschinenbestand">
+        </div>
+        <!-- Slide 4: Osama overview -->
+        <div class="lager-slide">
+          <img src="img/lager-osama-overview.png" alt="Osama Abadir Lagerhalle">
+          <div class="lager-nametag">O. Abadir</div>
+        </div>
+        <!-- Slide 5: Container Truck -->
+        <div class="lager-slide">
+          <img src="img/logistik-container-truck.png" alt="Containertransport">
+        </div>
+        <!-- Slide 6: Kalmar Forklift -->
+        <div class="lager-slide">
+          <img src="img/logistik-osama-kalmar.png" alt="Osama Abadir Kalmar Stapler">
           <div class="lager-nametag">O. Abadir</div>
         </div>
       </div>
-
-      <!-- Foto 2: Halle Übersicht mit Kranbalken -->
-      <div class="lager-card scroll-fade d1">
-        <div class="lager-img-wrap">
-          <img src="img/lager-halle-overview.png" alt="Lagerhalle Übersicht" loading="lazy">
-        </div>
+      <!-- Arrows -->
+      <button class="lager-arrow lager-prev" onclick="lagerSlide(-1)" aria-label="Zurück">&#8249;</button>
+      <button class="lager-arrow lager-next" onclick="lagerSlide(1)" aria-label="Weiter">&#8250;</button>
+      <!-- Dots -->
+      <div class="lager-dots" id="lagerDots">
+        <span class="lager-dot active" onclick="lagerGoTo(0)"></span>
+        <span class="lager-dot" onclick="lagerGoTo(1)"></span>
+        <span class="lager-dot" onclick="lagerGoTo(2)"></span>
+        <span class="lager-dot" onclick="lagerGoTo(3)"></span>
+        <span class="lager-dot" onclick="lagerGoTo(4)"></span>
+        <span class="lager-dot" onclick="lagerGoTo(5)"></span>
       </div>
-
-      <!-- Foto 3: Halle Perspektive -->
-      <div class="lager-card scroll-fade d2">
-        <div class="lager-img-wrap">
-          <img src="img/lager-halle-perspektive.png" alt="Lagerhalle Maschinenbestand" loading="lazy">
-        </div>
-      </div>
-
-      <!-- Foto 4: Osama Overview — NAME TAG -->
-      <div class="lager-card scroll-fade d1">
-        <div class="lager-img-wrap">
-          <img src="img/lager-osama-overview.png" alt="Osama Abadir Lagerhalle" loading="lazy">
-          <div class="lager-nametag">O. Abadir</div>
-        </div>
-      </div>
-
-      <!-- Foto 5: Logistik Container Truck -->
-      <div class="lager-card scroll-fade d2">
-        <div class="lager-img-wrap">
-          <img src="img/logistik-container-truck.png" alt="Containertransport" loading="lazy">
-        </div>
-      </div>
-
-      <!-- Foto 6: Osama Kalmar Forklift — NAME TAG -->
-      <div class="lager-card scroll-fade">
-        <div class="lager-img-wrap">
-          <img src="img/logistik-osama-kalmar.png" alt="Osama Abadir Kalmar Stapler" loading="lazy">
-          <div class="lager-nametag">O. Abadir</div>
-        </div>
-      </div>
-
-    </div><!-- /lager-grid -->
+    </div><!-- /slider -->
   </div>
 </section>
 
@@ -1340,6 +1374,39 @@ function filter(cat, btn) {
   activeFilterCat = cat;
   applyFilters();
 }
+
+// LAGER SLIDER
+var lagerIndex = 0;
+var lagerTotal = 6;
+var lagerAutoTimer = null;
+
+function lagerGoTo(n) {
+  lagerIndex = (n + lagerTotal) % lagerTotal;
+  document.getElementById('lagerSlider').style.transform = 'translateX(-' + (lagerIndex * 100) + '%)';
+  document.querySelectorAll('.lager-dot').forEach(function(d, i) {
+    d.classList.toggle('active', i === lagerIndex);
+  });
+}
+function lagerSlide(dir) {
+  clearInterval(lagerAutoTimer);
+  lagerGoTo(lagerIndex + dir);
+  lagerStartAuto();
+}
+function lagerStartAuto() {
+  lagerAutoTimer = setInterval(function() { lagerGoTo(lagerIndex + 1); }, 4000);
+}
+document.addEventListener('DOMContentLoaded', function() {
+  lagerStartAuto();
+  // Touch/swipe support
+  var sl = document.getElementById('lagerSlider');
+  if (!sl) return;
+  var tx = 0;
+  sl.addEventListener('touchstart', function(e) { tx = e.touches[0].clientX; }, {passive:true});
+  sl.addEventListener('touchend', function(e) {
+    var diff = tx - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) { clearInterval(lagerAutoTimer); lagerGoTo(lagerIndex + (diff > 0 ? 1 : -1)); lagerStartAuto(); }
+  }, {passive:true});
+});
 
 function filterStatus(status, btn) {
   document.querySelectorAll('.fbtn-status').forEach(b => b.classList.remove('active'));
