@@ -163,6 +163,11 @@ nav {
 .trust-bar { background: var(--green); padding: 1rem 5vw; display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; }
 .trust-item { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.9); display: flex; align-items: center; gap: 0.5rem; }
 .trust-item::before { content: '✓'; font-size: 0.9rem; font-weight: 800; }
+.lang-bar { background: #1a1410; padding: 0.65rem 5vw; display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+.lang-bar-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(255,255,255,0.75); }
+.lang-bar-flag { font-size: 1rem; line-height: 1; }
+.lang-bar-divider { width: 1px; height: 1.1rem; background: rgba(201,162,39,0.35); }
+@media (max-width: 480px) { .lang-bar { gap: 0.9rem; justify-content: center; } .lang-bar-divider { display: none; } }
 
 /* ── SECTIONS COMMON ── */
 .section-wrap { max-width: 1200px; margin: 0 auto; padding: 0 5vw; }
@@ -495,6 +500,22 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
   <div class="trust-item" data-i18n="trust2">Weltweite Lieferung</div>
   <div class="trust-item" data-i18n="trust3">Persönliche Beratung</div>
   <div class="trust-item" data-i18n="trust4">Ankauf & Verkauf</div>
+</div>
+<div class="lang-bar">
+  <div class="lang-bar-item">
+    <span class="lang-bar-flag">🇩🇪</span>
+    <span>Wir kommunizieren auf Deutsch</span>
+  </div>
+  <div class="lang-bar-divider"></div>
+  <div class="lang-bar-item">
+    <span class="lang-bar-flag">🇬🇧</span>
+    <span>We communicate in English</span>
+  </div>
+  <div class="lang-bar-divider"></div>
+  <div class="lang-bar-item">
+    <span class="lang-bar-flag">🇸🇦</span>
+    <span style="direction:rtl;">نتواصل باللغة العربية</span>
+  </div>
 </div>
 
 <!-- ABOUT -->
