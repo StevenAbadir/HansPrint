@@ -576,7 +576,7 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
       <button class="fbtn" onclick="filter('digital',this)" data-i18n="filt-digital">Digitaldruck</button>
       <button class="fbtn" onclick="filter('weiter',this)" data-i18n="filt-weiter">Weiterverarbeitung</button>
     </div>
-    <div class="filter-bar" style="margin-top:0; margin-bottom:2.5rem;">
+    <div class="filter-bar" id="status-filter-bar" style="margin-top:0.5rem; margin-bottom:2.5rem; padding-top:0.75rem; border-top:1px solid var(--gray-200);">
       <button class="fbtn fbtn-status active" onclick="filterStatus('all',this)" data-i18n="filt-status-all">Alle Status</button>
       <button class="fbtn fbtn-status" onclick="filterStatus('avail',this)" data-i18n="filt-status-avail">✓ Verfügbar</button>
       <button class="fbtn fbtn-status" onclick="filterStatus('sold',this)" data-i18n="filt-status-sold">Verkauft</button>
