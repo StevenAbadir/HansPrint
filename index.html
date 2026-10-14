@@ -191,7 +191,8 @@ nav {
 .machines { padding: 6rem 0; }
 .machines-header { text-align: center; margin-bottom: 3rem; }
 .machines-header .section-sub { margin: 0 auto; }
-.filter-bar { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.filter-bar { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.75rem; }
+.filter-bar:last-of-type { margin-bottom: 2.5rem; }
 .fbtn { padding: 0.5rem 1.25rem; background: transparent; border: 1.5px solid var(--gray-200); border-radius: 100px; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-600); cursor: pointer; transition: all 0.2s; }
 .fbtn:hover, .fbtn.active { background: var(--purple); border-color: var(--purple); color: var(--white); }
 .mgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1.75rem; }
@@ -575,7 +576,7 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
       <button class="fbtn" onclick="filter('digital',this)" data-i18n="filt-digital">Digitaldruck</button>
       <button class="fbtn" onclick="filter('weiter',this)" data-i18n="filt-weiter">Weiterverarbeitung</button>
     </div>
-    <div class="filter-bar" style="margin-top:-1rem;">
+    <div class="filter-bar" style="margin-top:0; margin-bottom:2.5rem;">
       <button class="fbtn fbtn-status active" onclick="filterStatus('all',this)" data-i18n="filt-status-all">Alle Status</button>
       <button class="fbtn fbtn-status" onclick="filterStatus('avail',this)" data-i18n="filt-status-avail">✓ Verfügbar</button>
       <button class="fbtn fbtn-status" onclick="filterStatus('sold',this)" data-i18n="filt-status-sold">Verkauft</button>
