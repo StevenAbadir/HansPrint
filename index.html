@@ -1225,32 +1225,19 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
     <!-- SLIDER -->
     <div class="lager-slider-wrap scroll-fade d2">
       <div class="lager-slider" id="lagerSlider">
-        <!-- Slide 1: Osama close -->
-        <div class="lager-slide">
-          <img src="img/lager-osama-close.png" alt="Osama Abadir im Lager">
-          <div class="lager-nametag">O. Abadir</div>
-        </div>
-        <!-- Slide 2: Halle Übersicht -->
-        <div class="lager-slide">
-          <img src="img/lager-halle-overview.png" alt="Lagerhalle Übersicht">
-        </div>
-        <!-- Slide 3: Halle Perspektive -->
-        <div class="lager-slide">
-          <img src="img/lager-halle-perspektive.png" alt="Lagerhalle Maschinenbestand">
-        </div>
-        <!-- Slide 4: Osama overview -->
-        <div class="lager-slide">
-          <img src="img/lager-osama-overview.png" alt="Osama Abadir Lagerhalle">
-          <div class="lager-nametag">O. Abadir</div>
-        </div>
-        <!-- Slide 5: Container Truck -->
-        <div class="lager-slide">
-          <img src="img/logistik-container-truck.png" alt="Containertransport">
-        </div>
-        <!-- Slide 6: Kalmar Forklift -->
+        <!-- Slide 1: Osama Kalmar Stapler -->
         <div class="lager-slide">
           <img src="img/logistik-osama-kalmar.png" alt="Osama Abadir Kalmar Stapler">
           <div class="lager-nametag">O. Abadir</div>
+        </div>
+        <!-- Slide 2: Osama D-TEC Container -->
+        <div class="lager-slide">
+          <img src="img/logistik-osama-dtec.png" alt="Osama Abadir D-TEC Container">
+          <div class="lager-nametag">O. Abadir</div>
+        </div>
+        <!-- Slide 3: Gelber Stapler -->
+        <div class="lager-slide">
+          <img src="img/logistik-forklift.png" alt="Stapler lädt Druckmaschine">
         </div>
       </div>
       <!-- Arrows -->
@@ -1262,9 +1249,6 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
       <span class="lager-dot active" onclick="lagerGoTo(0)"></span>
       <span class="lager-dot" onclick="lagerGoTo(1)"></span>
       <span class="lager-dot" onclick="lagerGoTo(2)"></span>
-      <span class="lager-dot" onclick="lagerGoTo(3)"></span>
-      <span class="lager-dot" onclick="lagerGoTo(4)"></span>
-      <span class="lager-dot" onclick="lagerGoTo(5)"></span>
     </div>
   </div>
 </section>
@@ -1372,7 +1356,7 @@ function filter(cat, btn) {
 
 // LAGER SLIDER
 var lagerIndex = 0;
-var lagerTotal = 6;
+var lagerTotal = 3;
 var lagerAutoTimer = null;
 
 function lagerGoTo(n) {
