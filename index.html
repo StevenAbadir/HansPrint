@@ -598,6 +598,33 @@ nav {
   50% { box-shadow: 0 4px 28px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.1); }
 }
 
+/* ── GLOBE SECTION ── */
+.globe-section { background: var(--ink); padding: 5rem 0 4rem; }
+.globe-section .section-eyebrow { color: var(--purple-light); }
+.globe-section .section-title { color: var(--white); }
+.globe-sub { color: rgba(255,255,255,0.6); max-width: 600px; font-size: 0.95rem; line-height: 1.7; margin: 0.75rem 0 2rem; }
+.globe-wrap { position: relative; width: 100%; max-width: 700px; margin: 0 auto; }
+#hp-globe { display: block; width: 100%; cursor: grab; touch-action: none; }
+#hp-globe:active { cursor: grabbing; }
+.globe-tooltip {
+  position: fixed; background: rgba(10,14,26,0.92); border: 1px solid var(--purple);
+  color: var(--white); padding: 5px 11px; border-radius: 6px; font-size: 0.72rem;
+  pointer-events: none; opacity: 0; transition: opacity 0.15s; z-index: 300; white-space: nowrap;
+}
+.globe-countries {
+  display: flex; flex-wrap: wrap; gap: 0.4rem 0.6rem; margin-top: 1.5rem;
+  justify-content: center; max-width: 780px; margin-left: auto; margin-right: auto;
+}
+.globe-countries span {
+  background: rgba(184,146,42,0.12); border: 1px solid rgba(184,146,42,0.25);
+  color: rgba(255,255,255,0.75); border-radius: 20px; padding: 3px 11px;
+  font-size: 0.72rem; letter-spacing: 0.03em;
+}
+@media (max-width: 768px) {
+  .globe-section { padding: 3.5rem 0 3rem; }
+  .globe-sub { font-size: 0.88rem; }
+}
+
 /* ── FOOTER ── */
 footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; flex-wrap: wrap; gap: 1rem; }
 .foot-logo { display: flex; align-items: center; gap: 10px; }
@@ -1440,6 +1467,22 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
       <span class="lager-dot" onclick="lagerGoTo(6)"></span>
       <span class="lager-dot" onclick="lagerGoTo(7)"></span>
       <span class="lager-dot" onclick="lagerGoTo(8)"></span>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBE -->
+<section class="globe-section" id="globe-section">
+  <div class="section-wrap">
+    <div class="section-eyebrow scroll-up">Internationale Reichweite</div>
+    <h2 class="section-title scroll-up">Maschinen, die die Welt bereisen.</h2>
+    <p class="globe-sub scroll-up">In über 30 Ländern haben wir bereits Druckmaschinen erfolgreich geliefert — von Europa bis Asien, Afrika und Südamerika. Vertrauen kennt keine Grenzen.</p>
+    <div class="globe-wrap">
+      <canvas id="hp-globe"></canvas>
+      <div class="globe-tooltip" id="hp-tooltip"></div>
+    </div>
+    <div class="globe-countries">
+      <span>🇩🇪 Deutschland</span><span>🇵🇰 Pakistan</span><span>🇮🇳 Indien</span><span>🇸🇦 Saudi-Arabien</span><span>🇪🇬 Ägypten</span><span>🇫🇮 Finnland</span><span>🇵🇹 Portugal</span><span>🇪🇸 Spanien</span><span>🇨🇾 Zypern</span><span>🇫🇷 Frankreich</span><span>🇳🇱 Niederlande</span><span>🇧🇷 Brasilien</span><span>🇿🇦 Südafrika</span><span>🇳🇬 Nigeria</span><span>🇺🇬 Uganda</span><span>🇷🇺 Russland</span><span>🇱🇹 Litauen</span><span>🇹🇷 Türkei</span><span>🇮🇷 Iran</span><span>🇰🇿 Kasachstan</span><span>🇹🇭 Thailand</span><span>🇻🇳 Vietnam</span><span>🇨🇳 China</span><span>🇲🇾 Malaysia</span><span>🇮🇶 Irak</span><span>🇲🇦 Marokko</span><span>🇹🇳 Tunesien</span><span>🇵🇱 Polen</span><span>🇨🇿 Tschechien</span><span>🇲🇦 & mehr…</span>
     </div>
   </div>
 </section>
@@ -2702,6 +2745,153 @@ if (!sessionStorage.getItem('chatSeen')) {
     if (!chatOpen) { toggleChat(); sessionStorage.setItem('chatSeen','1'); }
   }, 8000);
 }
+</script>
+
+<script>
+(function() {
+  var canvas = document.getElementById('hp-globe');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var tip = document.getElementById('hp-tooltip');
+  var W, H, R;
+
+  function resize() {
+    var wrap = canvas.parentElement;
+    W = canvas.width = wrap.clientWidth;
+    H = canvas.height = Math.min(W * 0.65, 420);
+    R = Math.min(W, H) * 0.42;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var ORIGIN = { name: 'Bitburg, DE', lat: 49.97, lon: 6.52 };
+  var DESTS = [
+    {n:'Pakistan',lat:30.38,lon:69.35},{n:'Indien',lat:20.59,lon:78.96},
+    {n:'Saudi-Arabien',lat:23.89,lon:45.08},{n:'Ägypten',lat:26.82,lon:30.80},
+    {n:'Finnland',lat:61.92,lon:25.75},{n:'Portugal',lat:39.40,lon:-8.22},
+    {n:'Spanien',lat:40.46,lon:-3.75},{n:'Zypern',lat:35.13,lon:33.43},
+    {n:'Frankreich',lat:46.23,lon:2.21},{n:'Niederlande',lat:52.13,lon:5.29},
+    {n:'Brasilien',lat:-14.24,lon:-51.93},{n:'Südafrika',lat:-30.56,lon:22.94},
+    {n:'Nigeria',lat:9.08,lon:8.68},{n:'Uganda',lat:1.37,lon:32.29},
+    {n:'Russland',lat:61.52,lon:105.32},{n:'Litauen',lat:55.17,lon:23.88},
+    {n:'Türkei',lat:38.96,lon:35.24},{n:'Iran',lat:32.43,lon:53.69},
+    {n:'Kasachstan',lat:48.02,lon:66.92},{n:'Thailand',lat:15.87,lon:100.99},
+    {n:'Vietnam',lat:14.06,lon:108.28},{n:'China',lat:35.86,lon:104.19},
+    {n:'Malaysia',lat:4.21,lon:108.96},{n:'Irak',lat:33.22,lon:43.68},
+    {n:'Marokko',lat:31.79,lon:-7.09},{n:'Tunesien',lat:33.89,lon:9.54},
+    {n:'Polen',lat:51.92,lon:19.15},{n:'Tschechien',lat:49.82,lon:15.47}
+  ];
+
+  var rotX = 0.28, rotY = 0.4, velY = 0.0015;
+  var dragging = false, lastX, lastY, velXd = 0;
+  var arcP = 0, arcDone = false;
+  var allDots = [];
+
+  function rad(d) { return d * Math.PI / 180; }
+
+  function proj(lat, lon) {
+    var p = rad(lat), l = rad(lon);
+    var x = Math.cos(p)*Math.sin(l), y = Math.sin(p), z = Math.cos(p)*Math.cos(l);
+    var x1 = x*Math.cos(rotY)+z*Math.sin(rotY), z1 = -x*Math.sin(rotY)+z*Math.cos(rotY);
+    var y1 = y*Math.cos(rotX)-z1*Math.sin(rotX), z2 = y*Math.sin(rotX)+z1*Math.cos(rotX);
+    return { x: x1*R+W/2, y: -y1*R+H/2, z: z2 };
+  }
+
+  function gcPts(la1,lo1,la2,lo2,n) {
+    var pts=[], f1=rad(la1),g1=rad(lo1),f2=rad(la2),g2=rad(lo2);
+    var d=2*Math.asin(Math.sqrt(Math.pow(Math.sin((f2-f1)/2),2)+Math.cos(f1)*Math.cos(f2)*Math.pow(Math.sin((g2-g1)/2),2)));
+    for(var i=0;i<=n;i++){
+      var t=i/n;
+      if(d<0.0001){pts.push({lat:la1,lon:lo1});continue;}
+      var A=Math.sin((1-t)*d)/Math.sin(d), B=Math.sin(t*d)/Math.sin(d);
+      var x=A*Math.cos(f1)*Math.cos(g1)+B*Math.cos(f2)*Math.cos(g2);
+      var y=A*Math.cos(f1)*Math.sin(g1)+B*Math.cos(f2)*Math.sin(g2);
+      var z=A*Math.sin(f1)+B*Math.sin(f2);
+      pts.push({lat:Math.atan2(z,Math.sqrt(x*x+y*y))*180/Math.PI, lon:Math.atan2(y,x)*180/Math.PI});
+    }
+    return pts;
+  }
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    // Sphere
+    var g=ctx.createRadialGradient(W/2-R*.28,H/2-R*.28,R*.04,W/2,H/2,R);
+    g.addColorStop(0,'#1e3060'); g.addColorStop(.5,'#0d1829'); g.addColorStop(1,'#060b14');
+    ctx.beginPath(); ctx.arc(W/2,H/2,R,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
+    // Rim glow
+    var rg=ctx.createRadialGradient(W/2,H/2,R*.9,W/2,H/2,R);
+    rg.addColorStop(0,'rgba(184,146,42,0)'); rg.addColorStop(1,'rgba(184,146,42,0.15)');
+    ctx.beginPath(); ctx.arc(W/2,H/2,R,0,Math.PI*2); ctx.fillStyle=rg; ctx.fill();
+    // Grid
+    ctx.strokeStyle='rgba(100,140,200,0.1)'; ctx.lineWidth=0.5;
+    for(var lat=-80;lat<=80;lat+=20){
+      ctx.beginPath(); var fst=true;
+      for(var lon=-180;lon<=180;lon+=4){var p=proj(lat,lon);if(p.z>0){fst?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y);fst=false;}else fst=true;} ctx.stroke();
+    }
+    for(var lon2=-180;lon2<180;lon2+=20){
+      ctx.beginPath(); var fst2=true;
+      for(var lat2=-90;lat2<=90;lat2+=4){var p2=proj(lat2,lon2);if(p2.z>0){fst2?ctx.moveTo(p2.x,p2.y):ctx.lineTo(p2.x,p2.y);fst2=false;}else fst2=true;} ctx.stroke();
+    }
+    // Arcs
+    var prog = arcDone ? 1 : Math.min(arcP, 1);
+    var steps=70;
+    DESTS.forEach(function(d){
+      var pts=gcPts(ORIGIN.lat,ORIGIN.lon,d.lat,d.lon,steps);
+      var ds=Math.floor(prog*steps);
+      ctx.beginPath(); var fst=true, any=false;
+      for(var i=0;i<=ds;i++){var p=proj(pts[i].lat,pts[i].lon);if(p.z>0){fst?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y);fst=false;any=true;}else fst=true;}
+      if(any){ctx.strokeStyle='rgba(226,188,80,0.08)';ctx.lineWidth=3.5;ctx.stroke();}
+      ctx.beginPath(); fst=true; any=false;
+      for(var i2=0;i2<=ds;i2++){var p2=proj(pts[i2].lat,pts[i2].lon);if(p2.z>0){fst?ctx.moveTo(p2.x,p2.y):ctx.lineTo(p2.x,p2.y);fst=false;any=true;}else fst=true;}
+      if(any){ctx.strokeStyle='rgba(226,188,80,0.75)';ctx.lineWidth=1.2;ctx.stroke();}
+      if(!arcDone && ds>0 && ds<steps){var tp=proj(pts[ds].lat,pts[ds].lon);if(tp.z>0.05){ctx.beginPath();ctx.arc(tp.x,tp.y,2.5,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();}}
+    });
+    // Dots
+    allDots.length=0;
+    DESTS.forEach(function(d){var pt=dotAt(d.lat,d.lon,'#e07840',4.5,d.n,false);if(pt)allDots.push(pt);});
+    var op=dotAt(ORIGIN.lat,ORIGIN.lon,'#e2bc50',6.5,'Bitburg, DE',true);
+    if(op)allDots.push(op);
+  }
+
+  function dotAt(lat,lon,col,sz,lbl,bold){
+    var p=proj(lat,lon);
+    if(p.z<0.05) return null;
+    var gw=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,sz*3.5);
+    gw.addColorStop(0,col.replace('#','rgba(').replace(/(..)(..)(..)$/,function(_,r,g,b){return parseInt(r,16)+','+parseInt(g,16)+','+parseInt(b,16)+',0.35)';}));
+    gw.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.beginPath();ctx.arc(p.x,p.y,sz*3.5,0,Math.PI*2);ctx.fillStyle=gw;ctx.fill();
+    ctx.beginPath();ctx.arc(p.x,p.y,sz,0,Math.PI*2);ctx.fillStyle=col;ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.7)';ctx.lineWidth=0.8;ctx.stroke();
+    if(bold){
+      ctx.font='600 10px Montserrat,sans-serif';
+      var tw=ctx.measureText(lbl).width;
+      ctx.fillStyle='rgba(10,14,26,0.8)';ctx.fillRect(p.x+sz+3,p.y-10,tw+8,13);
+      ctx.fillStyle='#e2bc50';ctx.fillText(lbl,p.x+sz+7,p.y+1);
+    }
+    return {x:p.x,y:p.y,r:sz+7,n:lbl};
+  }
+
+  var lt=0;
+  function animate(ts){
+    var dt=Math.min(ts-lt,50); lt=ts;
+    if(!arcDone){arcP+=dt*0.0009;if(arcP>=1)arcDone=true;}
+    if(!dragging){rotY+=velY;rotX+=velXd;velXd*=0.95;}
+    draw();
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+
+  canvas.addEventListener('pointerdown',function(e){dragging=true;lastX=e.clientX;lastY=e.clientY;velY=0;velXd=0;canvas.setPointerCapture(e.pointerId);});
+  canvas.addEventListener('pointermove',function(e){
+    if(dragging){velY=(e.clientX-lastX)*0.009;velXd=(e.clientY-lastY)*0.009;rotY+=velY;rotX+=velXd;lastX=e.clientX;lastY=e.clientY;}
+    var rect=canvas.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top,hit=null;
+    for(var i=0;i<allDots.length;i++){if(Math.sqrt((mx-allDots[i].x)**2+(my-allDots[i].y)**2)<allDots[i].r+6){hit=allDots[i];break;}}
+    if(hit){tip.textContent=hit.n;tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY-10)+'px';tip.style.opacity='1';}
+    else tip.style.opacity='0';
+  });
+  canvas.addEventListener('pointerup',function(){dragging=false;});
+  canvas.addEventListener('pointerleave',function(){dragging=false;tip.style.opacity='0';});
+})();
 </script>
 </body>
 </html>
