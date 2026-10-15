@@ -230,6 +230,67 @@ nav {
 .mcta { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); text-decoration: none; border-bottom: 1.5px solid var(--green); padding-bottom: 1px; transition: color 0.2s; }
 .mcta:hover { color: var(--purple); border-color: var(--purple); }
 
+/* ── FAVOURITES ── */
+.fav-btn {
+  position: absolute; top: 10px; right: 10px; z-index: 10;
+  width: 34px; height: 34px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(255,255,255,0.92); display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: transform 0.2s, background 0.2s;
+  font-size: 1.1rem; line-height: 1;
+}
+.fav-btn:hover { transform: scale(1.15); }
+.fav-btn.active { background: #fff0f0; }
+.nav-fav-btn {
+  background: none; border: none; cursor: pointer; position: relative;
+  display: flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.5rem;
+  color: var(--gray-600); font-size: 1.3rem; transition: color 0.2s;
+}
+.nav-fav-btn:hover { color: #e84040; }
+.nav-fav-count {
+  position: absolute; top: -4px; right: -4px;
+  background: #e84040; color: #fff; border-radius: 50%;
+  width: 17px; height: 17px; font-size: 0.6rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  display: none;
+}
+.fav-panel {
+  position: fixed; top: 0; right: -380px; width: 360px; height: 100vh;
+  background: var(--white); z-index: 800; box-shadow: -8px 0 40px rgba(0,0,0,0.15);
+  display: flex; flex-direction: column; transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+  font-family: 'Montserrat', sans-serif;
+}
+.fav-panel.open { right: 0; }
+.fav-panel-header {
+  background: linear-gradient(135deg,#1a1410,#2a2018); color: #fff;
+  padding: 1.25rem 1.25rem; display: flex; align-items: center; justify-content: space-between;
+}
+.fav-panel-title { font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; }
+.fav-panel-close { background: none; border: none; color: rgba(255,255,255,0.6); font-size: 1.3rem; cursor: pointer; }
+.fav-panel-close:hover { color: #fff; }
+.fav-panel-body { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.85rem; }
+.fav-empty { text-align: center; color: var(--gray-600); font-size: 0.85rem; margin-top: 3rem; }
+.fav-empty span { font-size: 2.5rem; display: block; margin-bottom: 0.75rem; }
+.fav-item { display: flex; gap: 0.85rem; align-items: center; background: var(--off-white); border: 1px solid var(--gray-200); border-radius: 10px; padding: 0.75rem; }
+.fav-item-info { flex: 1; }
+.fav-item-maker { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple); }
+.fav-item-name { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin: 0.1rem 0 0.3rem; }
+.fav-item-price { font-size: 0.78rem; color: var(--purple); font-weight: 600; }
+.fav-item-remove { background: none; border: none; cursor: pointer; font-size: 1.1rem; color: #ccc; padding: 0; }
+.fav-item-remove:hover { color: #e84040; }
+.fav-panel-footer { padding: 1rem; border-top: 1px solid var(--gray-200); }
+.fav-enquire-btn {
+  width: 100%; padding: 0.85rem; background: linear-gradient(135deg,#b8922a,#e2bc50);
+  color: #1a1410; border: none; border-radius: 8px; font-family: inherit;
+  font-size: 0.82rem; font-weight: 800; letter-spacing: 0.06em; cursor: pointer;
+  text-transform: uppercase; transition: opacity 0.2s;
+}
+.fav-enquire-btn:hover { opacity: 0.9; }
+.fav-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 799; display: none; }
+.fav-overlay.open { display: block; }
+@media (max-width: 480px) {
+  .fav-panel { width: 100vw; right: -100vw; }
+}
+
 /* ── ANKAUF SECTION ── */
 .ankauf { padding: 6rem 0; background: var(--gray-800); }
 .ankauf .section-eyebrow { color: #e2bc50; }
@@ -658,6 +719,9 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
       <li><a href="#ueber" data-i18n="nav-about" onclick="closeMenu()">Über uns</a></li>
       <li><a href="#kontakt" class="nav-cta" data-i18n="nav-cta" onclick="closeMenu()">Anfrage</a></li>
     </ul>
+    <button class="nav-fav-btn" onclick="toggleFavPanel()" aria-label="Merkliste">
+      ♡<span class="nav-fav-count" id="navFavCount">0</span>
+    </button>
     <div class="lang-switcher">
       <button class="lang-btn active" data-lang="de" onclick="setLang('de')">DE</button>
       <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
@@ -1521,6 +1585,21 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
     <a href="impressum.html#tab-datenschutz" onclick="sessionStorage.setItem('legal-tab','datenschutz')" style="color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.75rem;transition:color 0.2s;" onmouseover="this.style.color='#d4aa50'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Datenschutz</a>
   </div>
 </footer>
+
+<!-- FAVOURITES PANEL -->
+<div class="fav-overlay" id="favOverlay" onclick="toggleFavPanel()"></div>
+<div class="fav-panel" id="favPanel">
+  <div class="fav-panel-header">
+    <div class="fav-panel-title" id="favPanelTitle">♡ Merkliste</div>
+    <button class="fav-panel-close" onclick="toggleFavPanel()">✕</button>
+  </div>
+  <div class="fav-panel-body" id="favPanelBody">
+    <div class="fav-empty"><span>♡</span><span id="favEmptyText">Noch keine Maschinen gemerkt.</span></div>
+  </div>
+  <div class="fav-panel-footer">
+    <button class="fav-enquire-btn" id="favEnquireBtn" onclick="enquireFavs()" data-i18n="fav-enquire">Alle anfragen →</button>
+  </div>
+</div>
 
 <!-- CHATBOT -->
 <div class="chat-widget" id="chatWidget">
@@ -2502,6 +2581,120 @@ function sendChatMsg() {
     setTimeout(function() { showBotMsg(flow.start); }, 300);
   }
 }
+
+// ── FAVOURITES ──
+var favs = JSON.parse(localStorage.getItem('hp_favs') || '[]');
+
+function saveFavs() { try { localStorage.setItem('hp_favs', JSON.stringify(favs)); } catch(e){} }
+
+function updateFavCount() {
+  var el = document.getElementById('navFavCount');
+  if (!el) return;
+  el.textContent = favs.length;
+  el.style.display = favs.length > 0 ? 'flex' : 'none';
+  // update heart icon
+  var btn = el.parentElement;
+  if (btn) btn.innerHTML = (favs.length > 0 ? '♥' : '♡') + '<span class="nav-fav-count" id="navFavCount" style="display:' + (favs.length>0?'flex':'none') + '">' + favs.length + '</span>';
+}
+
+function initFavBtns() {
+  document.querySelectorAll('.mcard').forEach(function(card) {
+    var imgWrap = card.querySelector('.mcard-img');
+    if (!imgWrap || imgWrap.querySelector('.fav-btn')) return;
+    var maker = (card.querySelector('.mcard-maker') || {}).textContent || '';
+    var name  = (card.querySelector('.mcard-name')  || {}).textContent || '';
+    var price = (card.querySelector('.mprice')       || {}).textContent || '';
+    var id = (maker + '-' + name).replace(/\s+/g,'-').toLowerCase();
+    var isFav = favs.some(function(f){ return f.id === id; });
+    var btn = document.createElement('button');
+    btn.className = 'fav-btn' + (isFav ? ' active' : '');
+    btn.setAttribute('aria-label', 'Merken');
+    btn.innerHTML = isFav ? '♥' : '♡';
+    btn.style.color = isFav ? '#e84040' : '#888';
+    btn.onclick = function(e) {
+      e.preventDefault(); e.stopPropagation();
+      var idx = favs.findIndex(function(f){ return f.id === id; });
+      if (idx >= 0) {
+        favs.splice(idx, 1);
+        btn.innerHTML = '♡'; btn.style.color = '#888'; btn.classList.remove('active');
+      } else {
+        favs.push({ id: id, maker: maker, name: name, price: price });
+        btn.innerHTML = '♥'; btn.style.color = '#e84040'; btn.classList.add('active');
+        // mini bounce
+        btn.style.transform = 'scale(1.4)';
+        setTimeout(function(){ btn.style.transform = ''; }, 200);
+      }
+      saveFavs(); updateFavCount(); renderFavPanel();
+    };
+    imgWrap.style.position = 'relative';
+    imgWrap.appendChild(btn);
+  });
+}
+
+function renderFavPanel() {
+  var body = document.getElementById('favPanelBody');
+  if (!body) return;
+  if (favs.length === 0) {
+    var emptyTxt = currentLang === 'en' ? 'No machines saved yet.' : currentLang === 'ar' ? 'لم يتم حفظ أي آلات بعد.' : 'Noch keine Maschinen gemerkt.';
+    body.innerHTML = '<div class="fav-empty"><span>♡</span><span>' + emptyTxt + '</span></div>';
+    return;
+  }
+  body.innerHTML = favs.map(function(f) {
+    return '<div class="fav-item">' +
+      '<div class="fav-item-info">' +
+        '<div class="fav-item-maker">' + f.maker + '</div>' +
+        '<div class="fav-item-name">' + f.name + '</div>' +
+        '<div class="fav-item-price">' + f.price + '</div>' +
+      '</div>' +
+      '<button class="fav-item-remove" onclick="removeFav(\'' + f.id + '\')">✕</button>' +
+    '</div>';
+  }).join('');
+}
+
+function removeFav(id) {
+  favs = favs.filter(function(f){ return f.id !== id; });
+  saveFavs(); updateFavCount(); renderFavPanel();
+  // update card button
+  document.querySelectorAll('.fav-btn.active').forEach(function(btn) {
+    var card = btn.closest('.mcard');
+    if (!card) return;
+    var maker = (card.querySelector('.mcard-maker')||{}).textContent||'';
+    var name  = (card.querySelector('.mcard-name') ||{}).textContent||'';
+    var cid = (maker+'-'+name).replace(/\s+/g,'-').toLowerCase();
+    if (cid === id) { btn.innerHTML='♡'; btn.style.color='#888'; btn.classList.remove('active'); }
+  });
+}
+
+function toggleFavPanel() {
+  var panel = document.getElementById('favPanel');
+  var overlay = document.getElementById('favOverlay');
+  var isOpen = panel.classList.contains('open');
+  panel.classList.toggle('open', !isOpen);
+  overlay.classList.toggle('open', !isOpen);
+  if (!isOpen) renderFavPanel();
+  // update title per lang
+  var title = document.getElementById('favPanelTitle');
+  if (title) title.textContent = (currentLang==='en' ? '♡ Saved Machines' : currentLang==='ar' ? '♡ الآلات المحفوظة' : '♡ Merkliste') + (favs.length > 0 ? ' (' + favs.length + ')' : '');
+}
+
+function enquireFavs() {
+  if (favs.length === 0) return;
+  toggleFavPanel();
+  document.getElementById('kontakt').scrollIntoView({behavior:'smooth'});
+  // pre-fill message field
+  setTimeout(function() {
+    var ta = document.querySelector('textarea[name="nachricht"], textarea[name="message"]');
+    if (ta) {
+      var list = favs.map(function(f){ return '• ' + f.maker + ' ' + f.name; }).join('\n');
+      ta.value = (currentLang==='en' ? 'I am interested in the following machines:\n' : currentLang==='ar' ? 'أنا مهتم بالآلات التالية:\n' : 'Ich interessiere mich für folgende Maschinen:\n') + list;
+    }
+  }, 800);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  initFavBtns();
+  updateFavCount();
+});
 
 // Auto-open after 8 seconds on first visit
 if (!sessionStorage.getItem('chatSeen')) {
