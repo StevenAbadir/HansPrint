@@ -2402,12 +2402,11 @@ function handleChatOpt(opt) {
       : 'ممتاز! لقد دوّنت: **' + chatData.type + '**، الميزانية **' + chatData.budget + '**. هل أقوم بإرسال طلبك؟';
     setTimeout(function() { showBotMsg({ msg: confirmMsg, opts: flow.confirm.opts }); }, 300);
   } else if (isSend) {
-    var thankMsg = lang === 'de' ? '✅ Vielen Dank! Osama wird sich bald bei Ihnen melden. Sie können uns auch direkt per WhatsApp erreichen. 📲'
-      : lang === 'en' ? '✅ Thank you! Osama will get back to you soon. You can also reach us directly on WhatsApp. 📲'
-      : '✅ شكراً جزيلاً! سيتواصل معك أسامة قريباً. يمكنك أيضاً التواصل عبر واتساب. 📲';
-    setTimeout(function() { showBotMsg({ msg: thankMsg, opts: null }); }, 300);
-    // scroll to contact form
-    setTimeout(function() { document.getElementById('kontakt') && document.getElementById('kontakt').scrollIntoView({behavior:'smooth'}); }, 1800);
+    chatStep = 'email';
+    var emailMsg = lang === 'de' ? 'Wie lautet Ihre E-Mail-Adresse, damit wir uns melden können?'
+      : lang === 'en' ? 'What is your email address so we can get back to you?'
+      : 'ما هو بريدك الإلكتروني حتى نتواصل معك؟';
+    setTimeout(function() { showBotMsg({ msg: emailMsg, opts: null }); }, 300);
   } else {
     setTimeout(function() { showBotMsg(flow.start); }, 300);
   }
@@ -2421,12 +2420,72 @@ function sendChatMsg() {
   addUserMsg(text);
   var lang = getChatLang();
   var flow = chatFlows[lang];
-  if (chatStep === 'sell') {
+  if (chatStep === 'email') {
+    // basic email validation
+    if (!text.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      var invalidMsg = lang === 'de' ? 'Bitte geben Sie eine gültige E-Mail-Adresse ein.'
+        : lang === 'en' ? 'Please enter a valid email address.'
+        : 'يرجى إدخال بريد إلكتروني صحيح.';
+      setTimeout(function() { showBotMsg({ msg: invalidMsg, opts: null }); }, 300);
+      return;
+    }
+    chatData.email = text;
+    // submit to Formspree
+    var body = new FormData();
+    body.append('_subject', 'Chatbot-Anfrage – HansarPrint');
+    body.append('anfrage_typ', 'Chatbot-Maschinengesuch');
+    body.append('email', chatData.email);
+    body.append('maschinentyp', chatData.type || '–');
+    body.append('budget', chatData.budget || '–');
+    fetch('https://formspree.io/f/xgaozpba', { method: 'POST', body: body, headers: { 'Accept': 'application/json' } })
+      .then(function(r) {
+        var ok = r.ok;
+        var thankMsg = ok
+          ? (lang === 'de' ? '✅ Anfrage gesendet! Osama meldet sich bald unter ' + chatData.email + '. 📲'
+            : lang === 'en' ? '✅ Enquiry sent! Osama will contact you soon at ' + chatData.email + '. 📲'
+            : '✅ تم إرسال الطلب! سيتواصل معك أسامة قريباً على ' + chatData.email + '. 📲')
+          : (lang === 'de' ? 'Es gab einen Fehler. Bitte kontaktieren Sie uns direkt per WhatsApp. 📲'
+            : lang === 'en' ? 'There was an error. Please contact us directly via WhatsApp. 📲'
+            : 'حدث خطأ. يرجى التواصل معنا مباشرة عبر واتساب. 📲');
+        showBotMsg({ msg: thankMsg, opts: null });
+      })
+      .catch(function() {
+        showBotMsg({ msg: lang === 'de' ? 'Netzwerkfehler. Bitte WhatsApp nutzen. 📲' : 'Network error. Please use WhatsApp. 📲', opts: null });
+      });
+  } else if (chatStep === 'sell') {
     chatData.sellDesc = text;
-    var replyMsg = lang === 'de' ? 'Danke! Wir melden uns zeitnah mit einer Einschätzung. Alternativ können Sie uns auch direkt per WhatsApp kontaktieren. 📲'
-      : lang === 'en' ? 'Thank you! We will get back to you shortly with an assessment. You can also contact us directly via WhatsApp. 📲'
-      : 'شكراً! سنتواصل معك قريباً بتقييم. يمكنك أيضاً التواصل معنا مباشرة عبر واتساب. 📲';
-    setTimeout(function() { showBotMsg({ msg: replyMsg, opts: [lang==='de'?'🔄 Neu starten':lang==='en'?'🔄 Restart':'🔄 إعادة البدء'] }); }, 300);
+    // submit sell enquiry
+    var sbody = new FormData();
+    sbody.append('_subject', 'Chatbot-Verkauf – HansarPrint');
+    sbody.append('anfrage_typ', 'Chatbot-Maschinenverkauf');
+    sbody.append('beschreibung', text);
+    chatStep = 'sell-email';
+    var sellEmailMsg = lang === 'de' ? 'Danke! Wie lautet Ihre E-Mail-Adresse?'
+      : lang === 'en' ? 'Thank you! What is your email address?'
+      : 'شكراً! ما هو بريدك الإلكتروني؟';
+    setTimeout(function() { showBotMsg({ msg: sellEmailMsg, opts: null }); }, 300);
+  } else if (chatStep === 'sell-email') {
+    if (!text.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      var sinvalidMsg = lang === 'de' ? 'Bitte geben Sie eine gültige E-Mail-Adresse ein.'
+        : lang === 'en' ? 'Please enter a valid email address.'
+        : 'يرجى إدخال بريد إلكتروني صحيح.';
+      setTimeout(function() { showBotMsg({ msg: sinvalidMsg, opts: null }); }, 300);
+      return;
+    }
+    var sbody2 = new FormData();
+    sbody2.append('_subject', 'Chatbot-Verkauf – HansarPrint');
+    sbody2.append('anfrage_typ', 'Chatbot-Maschinenverkauf');
+    sbody2.append('beschreibung', chatData.sellDesc || '–');
+    sbody2.append('email', text);
+    fetch('https://formspree.io/f/xgaozpba', { method: 'POST', body: sbody2, headers: { 'Accept': 'application/json' } })
+      .then(function(r) {
+        var smsg = r.ok
+          ? (lang === 'de' ? '✅ Danke! Wir melden uns bald bei ' + text + '. 📲'
+            : lang === 'en' ? '✅ Thank you! We will contact you at ' + text + ' soon. 📲'
+            : '✅ شكراً! سنتواصل معك على ' + text + ' قريباً. 📲')
+          : (lang === 'de' ? 'Fehler beim Senden. Bitte WhatsApp nutzen.' : 'Error sending. Please use WhatsApp.');
+        showBotMsg({ msg: smsg, opts: null });
+      });
   } else {
     setTimeout(function() { showBotMsg(flow.start); }, 300);
   }
