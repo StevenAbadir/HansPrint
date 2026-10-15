@@ -415,6 +415,77 @@ nav {
 .form-thanks .big { font-family: 'Lora', serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
 .form-thanks p { font-size: 0.85rem; color: rgba(255,255,255,0.5); }
 
+/* ── CHATBOT ── */
+.chat-widget { position: fixed; bottom: 1.75rem; left: 1.75rem; z-index: 500; font-family: 'Montserrat', sans-serif; }
+.chat-toggle {
+  width: 58px; height: 58px; border-radius: 50%; border: none; cursor: pointer;
+  background: linear-gradient(135deg, #b8922a, #e2bc50);
+  box-shadow: 0 4px 20px rgba(184,146,42,0.45);
+  display: flex; align-items: center; justify-content: center;
+  animation: chatPulse 2.5s ease-in-out infinite;
+  transition: transform 0.2s, box-shadow 0.2s;
+  padding: 0; overflow: hidden;
+}
+.chat-toggle:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(184,146,42,0.6); animation: none; }
+@keyframes chatPulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(184,146,42,0.45); }
+  50% { box-shadow: 0 4px 28px rgba(184,146,42,0.75); }
+}
+.chat-avatar-svg { width: 58px; height: 58px; }
+.chat-box {
+  position: absolute; bottom: 72px; left: 0;
+  width: 320px; background: #fff; border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18); overflow: hidden;
+  display: none; flex-direction: column;
+  border: 1px solid var(--gray-200);
+  max-height: 480px;
+}
+.chat-box.open { display: flex; }
+.chat-header {
+  background: linear-gradient(135deg, #1a1410, #2a2018);
+  padding: 0.9rem 1rem; display: flex; align-items: center; gap: 0.75rem;
+}
+.chat-header-avatar { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--purple); flex-shrink: 0; }
+.chat-header-info { flex: 1; }
+.chat-header-name { color: #fff; font-size: 0.82rem; font-weight: 700; }
+.chat-header-status { color: #4ade80; font-size: 0.68rem; display: flex; align-items: center; gap: 4px; }
+.chat-header-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4ade80; display: inline-block; }
+.chat-close { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 1.2rem; cursor: pointer; padding: 0; line-height: 1; }
+.chat-close:hover { color: #fff; }
+.chat-messages { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.65rem; scroll-behavior: smooth; }
+.chat-msg { max-width: 85%; padding: 0.6rem 0.85rem; border-radius: 12px; font-size: 0.8rem; line-height: 1.5; }
+.chat-msg.bot { background: #f5f0e8; color: var(--ink); align-self: flex-start; border-bottom-left-radius: 4px; }
+.chat-msg.user { background: var(--purple); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+.chat-options { padding: 0.5rem 1rem 0.75rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.chat-opt-btn {
+  background: transparent; border: 1.5px solid var(--purple); color: var(--purple);
+  border-radius: 20px; padding: 0.35rem 0.75rem; font-size: 0.72rem; font-weight: 700;
+  cursor: pointer; transition: background 0.15s, color 0.15s; font-family: inherit;
+}
+.chat-opt-btn:hover { background: var(--purple); color: #fff; }
+.chat-input-row { display: flex; gap: 0.5rem; padding: 0.75rem; border-top: 1px solid var(--gray-200); }
+.chat-input {
+  flex: 1; border: 1px solid var(--gray-200); border-radius: 20px;
+  padding: 0.45rem 0.85rem; font-size: 0.78rem; font-family: inherit;
+  outline: none; color: var(--ink);
+}
+.chat-input:focus { border-color: var(--purple); }
+.chat-send {
+  width: 34px; height: 34px; border-radius: 50%; background: var(--purple);
+  border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: background 0.15s;
+}
+.chat-send:hover { background: #9a7820; }
+.chat-send svg { width: 16px; height: 16px; fill: #fff; }
+.chat-typing { display: flex; gap: 4px; align-items: center; padding: 0.6rem 0.85rem; background: #f5f0e8; border-radius: 12px; align-self: flex-start; border-bottom-left-radius: 4px; }
+.chat-typing span { width: 6px; height: 6px; border-radius: 50%; background: #b8922a; animation: typingDot 1.2s infinite; }
+.chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingDot { 0%,60%,100% { opacity: 0.3; transform: scale(1); } 30% { opacity: 1; transform: scale(1.2); } }
+@media (max-width: 480px) {
+  .chat-box { width: calc(100vw - 3.5rem); }
+  .chat-widget { bottom: 1rem; left: 1rem; }
+}
 /* ── WHATSAPP BUTTON ── */
 .wa-btn {
   position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 500;
@@ -1439,6 +1510,72 @@ footer { background: #111110; color: rgba(255,255,255,0.35); padding: 2rem 5vw; 
   </div>
 </footer>
 
+<!-- CHATBOT -->
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-box" id="chatBox">
+    <div class="chat-header">
+      <svg class="chat-header-avatar" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="19" cy="19" r="19" fill="#2a2018"/>
+        <!-- Gesicht -->
+        <ellipse cx="19" cy="20" rx="9" ry="10" fill="#c8956c"/>
+        <!-- Haare -->
+        <path d="M10 17 Q10 8 19 8 Q28 8 28 17 Q27 10 19 10 Q11 10 10 17Z" fill="#1a1008"/>
+        <rect x="10" y="10" width="18" height="7" rx="3" fill="#1a1008"/>
+        <!-- Brille -->
+        <rect x="11.5" y="18" width="6" height="4" rx="2" fill="none" stroke="#1a1008" stroke-width="1.2"/>
+        <rect x="20.5" y="18" width="6" height="4" rx="2" fill="none" stroke="#1a1008" stroke-width="1.2"/>
+        <line x1="17.5" y1="20" x2="20.5" y2="20" stroke="#1a1008" stroke-width="1.2"/>
+        <!-- Augen -->
+        <circle cx="14.5" cy="20" r="1.2" fill="#1a1008"/>
+        <circle cx="23.5" cy="20" r="1.2" fill="#1a1008"/>
+        <!-- Nase -->
+        <ellipse cx="19" cy="23.5" rx="1.5" ry="1" fill="#b07050"/>
+        <!-- Mund -->
+        <path d="M15.5 26 Q19 28.5 22.5 26" fill="none" stroke="#8a5030" stroke-width="1.2" stroke-linecap="round"/>
+        <!-- Schultern -->
+        <path d="M8 38 Q10 30 19 30 Q28 30 30 38Z" fill="#2060a0"/>
+      </svg>
+      <div class="chat-header-info">
+        <div class="chat-header-name">Osama Abadir · HansarPrint</div>
+        <div class="chat-header-status" id="chatStatus">Online</div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-options" id="chatOptions"></div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Nachricht schreiben…" onkeydown="if(event.key==='Enter')sendChatMsg()">
+      <button class="chat-send" onclick="sendChatMsg()">
+        <svg viewBox="0 0 24 24"><path d="M2 21L23 12 2 3v7l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
+  <button class="chat-toggle" onclick="toggleChat()" aria-label="Chat öffnen">
+    <svg class="chat-avatar-svg" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="29" cy="29" r="29" fill="url(#cg)"/>
+      <defs><linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#b8922a"/><stop offset="100%" stop-color="#e2bc50"/></linearGradient></defs>
+      <!-- Gesicht -->
+      <ellipse cx="29" cy="31" rx="11" ry="12" fill="#c8956c"/>
+      <!-- Haare -->
+      <path d="M18 25 Q18 14 29 14 Q40 14 40 25 Q39 17 29 17 Q19 17 18 25Z" fill="#1a1008"/>
+      <rect x="18" y="14" width="22" height="10" rx="4" fill="#1a1008"/>
+      <!-- Brille -->
+      <rect x="19" y="27" width="8" height="5" rx="2.5" fill="none" stroke="#1a1008" stroke-width="1.5"/>
+      <rect x="31" y="27" width="8" height="5" rx="2.5" fill="none" stroke="#1a1008" stroke-width="1.5"/>
+      <line x1="27" y1="29.5" x2="31" y2="29.5" stroke="#1a1008" stroke-width="1.5"/>
+      <!-- Augen -->
+      <circle cx="23" cy="29.5" r="1.5" fill="#1a1008"/>
+      <circle cx="35" cy="29.5" r="1.5" fill="#1a1008"/>
+      <!-- Nase -->
+      <ellipse cx="29" cy="34" rx="2" ry="1.2" fill="#b07050"/>
+      <!-- Mund -->
+      <path d="M24 37.5 Q29 41 34 37.5" fill="none" stroke="#8a5030" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- Schultern -->
+      <path d="M10 58 Q13 46 29 46 Q45 46 48 58Z" fill="#2060a0"/>
+    </svg>
+  </button>
+</div>
+
 <!-- WHATSAPP BUTTON -->
 <div class="wa-wrap">
   <a class="wa-btn" href="https://wa.me/491726750875?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20eine%20Druckmaschine%20und%20w%C3%BCrde%20gerne%20mehr%20Informationen%20erhalten." target="_blank" rel="noopener" aria-label="WhatsApp Kontakt">
@@ -2139,6 +2276,168 @@ function polarPrev() { polarSlide((polarIdx+2)%3); }
 
 // Sprache beim Laden setzen
 setLang(currentLang);
+
+// ── CHATBOT ──
+var chatOpen = false;
+var chatStep = 'start';
+var chatData = {};
+
+var chatFlows = {
+  de: {
+    start: { msg: 'Hallo! 👋 Ich bin Osama von HansarPrint. Wie kann ich Ihnen helfen?', opts: ['🔍 Maschine suchen', '💰 Maschine verkaufen', '📦 Bestand ansehen', '📞 Kontakt'] },
+    buy: { msg: 'Welche Art von Maschine suchen Sie?', opts: ['Bogenoffset', 'Schneidemaschine / Polar', 'Falzmaschine', 'Sonstiges'] },
+    sell: { msg: 'Was für eine Maschine möchten Sie verkaufen? Bitte beschreiben Sie kurz Hersteller und Modell.', opts: null },
+    stock: { msg: 'Unseren aktuellen Maschinenbestand finden Sie direkt auf der Webseite unter "Maschinen". Darf ich Ihnen noch bei etwas helfen?', opts: ['🔍 Maschine suchen', '📞 Kontakt'] },
+    contact: { msg: 'Sie erreichen uns per WhatsApp oder über das Kontaktformular auf der Seite. Osama antwortet in der Regel innerhalb weniger Stunden. 📲', opts: ['🔍 Maschine suchen', '🔄 Neu starten'] },
+    budget: { msg: 'Was ist Ihr ungefähres Budget?', opts: ['Unter 5.000 €', '5.000 – 20.000 €', '20.000 – 50.000 €', 'Über 50.000 €'] },
+    confirm: { msg: null, opts: ['✅ Anfrage absenden', '🔄 Neu starten'] }
+  },
+  en: {
+    start: { msg: 'Hello! 👋 I\'m Osama from HansarPrint. How can I help you?', opts: ['🔍 Find a machine', '💰 Sell a machine', '📦 View stock', '📞 Contact'] },
+    buy: { msg: 'What type of machine are you looking for?', opts: ['Sheet-fed offset', 'Cutting machine / Polar', 'Folding machine', 'Other'] },
+    sell: { msg: 'What machine would you like to sell? Please describe the brand and model briefly.', opts: null },
+    stock: { msg: 'You can find our current machine stock on the website under "Machines". Can I help you with anything else?', opts: ['🔍 Find a machine', '📞 Contact'] },
+    contact: { msg: 'You can reach us via WhatsApp or through the contact form on the website. Osama usually responds within a few hours. 📲', opts: ['🔍 Find a machine', '🔄 Restart'] },
+    budget: { msg: 'What is your approximate budget?', opts: ['Under €5,000', '€5,000 – €20,000', '€20,000 – €50,000', 'Over €50,000'] },
+    confirm: { msg: null, opts: ['✅ Send enquiry', '🔄 Restart'] }
+  },
+  ar: {
+    start: { msg: 'مرحباً! 👋 أنا أسامة من HansarPrint. كيف يمكنني مساعدتك؟', opts: ['🔍 البحث عن آلة', '💰 بيع آلة', '📦 عرض المخزون', '📞 تواصل معنا'] },
+    buy: { msg: 'ما نوع الآلة التي تبحث عنها؟', opts: ['أوفست', 'آلة قطع / بولار', 'آلة طي', 'أخرى'] },
+    sell: { msg: 'ما الآلة التي تريد بيعها؟ يرجى وصف الماركة والموديل باختصار.', opts: null },
+    stock: { msg: 'يمكنك مشاهدة مخزوننا الحالي على الموقع تحت قسم "الآلات". هل يمكنني مساعدتك بشيء آخر؟', opts: ['🔍 البحث عن آلة', '📞 تواصل'] },
+    contact: { msg: 'يمكنك التواصل معنا عبر واتساب أو نموذج الاتصال. أسامة يرد عادةً في غضون ساعات قليلة. 📲', opts: ['🔍 البحث عن آلة', '🔄 إعادة البدء'] },
+    budget: { msg: 'ما هي ميزانيتك التقريبية؟', opts: ['أقل من 5,000 €', '5,000 – 20,000 €', '20,000 – 50,000 €', 'أكثر من 50,000 €'] },
+    confirm: { msg: null, opts: ['✅ إرسال الطلب', '🔄 إعادة البدء'] }
+  }
+};
+
+function getChatLang() {
+  return currentLang === 'ar' ? 'ar' : currentLang === 'en' ? 'en' : 'de';
+}
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  var box = document.getElementById('chatBox');
+  box.classList.toggle('open', chatOpen);
+  if (chatOpen && document.getElementById('chatMessages').children.length === 0) {
+    chatStep = 'start';
+    chatData = {};
+    setTimeout(function() { showBotMsg(chatFlows[getChatLang()].start); }, 300);
+  }
+}
+
+function showBotMsg(flow) {
+  var msgs = document.getElementById('chatMessages');
+  var opts = document.getElementById('chatOptions');
+  // typing indicator
+  var typing = document.createElement('div');
+  typing.className = 'chat-typing';
+  typing.innerHTML = '<span></span><span></span><span></span>';
+  msgs.appendChild(typing);
+  msgs.scrollTop = msgs.scrollHeight;
+  setTimeout(function() {
+    msgs.removeChild(typing);
+    if (flow.msg) {
+      var m = document.createElement('div');
+      m.className = 'chat-msg bot';
+      m.textContent = flow.msg;
+      msgs.appendChild(m);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+    opts.innerHTML = '';
+    if (flow.opts) {
+      flow.opts.forEach(function(o) {
+        var b = document.createElement('button');
+        b.className = 'chat-opt-btn';
+        b.textContent = o;
+        b.onclick = function() { handleChatOpt(o); };
+        opts.appendChild(b);
+      });
+    }
+  }, 900);
+}
+
+function addUserMsg(text) {
+  var msgs = document.getElementById('chatMessages');
+  var m = document.createElement('div');
+  m.className = 'chat-msg user';
+  m.textContent = text;
+  msgs.appendChild(m);
+  msgs.scrollTop = msgs.scrollHeight;
+  document.getElementById('chatOptions').innerHTML = '';
+}
+
+function handleChatOpt(opt) {
+  addUserMsg(opt);
+  var lang = getChatLang();
+  var flow = chatFlows[lang];
+  var isBuy = ['🔍 Maschine suchen','🔍 Find a machine','🔍 البحث عن آلة'].includes(opt);
+  var isSell = ['💰 Maschine verkaufen','💰 Sell a machine','💰 بيع آلة'].includes(opt);
+  var isStock = ['📦 Bestand ansehen','📦 View stock','📦 عرض المخزون'].includes(opt);
+  var isContact = ['📞 Kontakt','📞 Contact','📞 تواصل معنا','📞 تواصل'].includes(opt);
+  var isRestart = opt.includes('Neu starten') || opt.includes('Restart') || opt.includes('إعادة البدء');
+  var isSend = opt.includes('absenden') || opt.includes('Send') || opt.includes('إرسال');
+
+  if (isRestart) {
+    chatStep = 'start'; chatData = {};
+    setTimeout(function() { showBotMsg(flow.start); }, 300);
+  } else if (isBuy) {
+    chatStep = 'buy'; setTimeout(function() { showBotMsg(flow.buy); }, 300);
+  } else if (isSell) {
+    chatStep = 'sell'; setTimeout(function() { showBotMsg(flow.sell); }, 300);
+  } else if (isStock) {
+    chatStep = 'stock'; setTimeout(function() { showBotMsg(flow.stock); }, 300);
+  } else if (isContact) {
+    chatStep = 'contact'; setTimeout(function() { showBotMsg(flow.contact); }, 300);
+  } else if (chatStep === 'buy') {
+    chatData.type = opt; chatStep = 'budget';
+    setTimeout(function() { showBotMsg(flow.budget); }, 300);
+  } else if (chatStep === 'budget') {
+    chatData.budget = opt; chatStep = 'confirm';
+    var confirmMsg = lang === 'de'
+      ? 'Super! Ich notiere: **' + chatData.type + '**, Budget **' + chatData.budget + '**. Soll ich Ihre Anfrage direkt weiterleiten?'
+      : lang === 'en'
+      ? 'Great! I noted: **' + chatData.type + '**, budget **' + chatData.budget + '**. Shall I forward your enquiry?'
+      : 'ممتاز! لقد دوّنت: **' + chatData.type + '**، الميزانية **' + chatData.budget + '**. هل أقوم بإرسال طلبك؟';
+    setTimeout(function() { showBotMsg({ msg: confirmMsg, opts: flow.confirm.opts }); }, 300);
+  } else if (isSend) {
+    var thankMsg = lang === 'de' ? '✅ Vielen Dank! Osama wird sich bald bei Ihnen melden. Sie können uns auch direkt per WhatsApp erreichen. 📲'
+      : lang === 'en' ? '✅ Thank you! Osama will get back to you soon. You can also reach us directly on WhatsApp. 📲'
+      : '✅ شكراً جزيلاً! سيتواصل معك أسامة قريباً. يمكنك أيضاً التواصل عبر واتساب. 📲';
+    setTimeout(function() { showBotMsg({ msg: thankMsg, opts: null }); }, 300);
+    // scroll to contact form
+    setTimeout(function() { document.getElementById('kontakt') && document.getElementById('kontakt').scrollIntoView({behavior:'smooth'}); }, 1800);
+  } else {
+    setTimeout(function() { showBotMsg(flow.start); }, 300);
+  }
+}
+
+function sendChatMsg() {
+  var input = document.getElementById('chatInput');
+  var text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addUserMsg(text);
+  var lang = getChatLang();
+  var flow = chatFlows[lang];
+  if (chatStep === 'sell') {
+    chatData.sellDesc = text;
+    var replyMsg = lang === 'de' ? 'Danke! Wir melden uns zeitnah mit einer Einschätzung. Alternativ können Sie uns auch direkt per WhatsApp kontaktieren. 📲'
+      : lang === 'en' ? 'Thank you! We will get back to you shortly with an assessment. You can also contact us directly via WhatsApp. 📲'
+      : 'شكراً! سنتواصل معك قريباً بتقييم. يمكنك أيضاً التواصل معنا مباشرة عبر واتساب. 📲';
+    setTimeout(function() { showBotMsg({ msg: replyMsg, opts: [lang==='de'?'🔄 Neu starten':lang==='en'?'🔄 Restart':'🔄 إعادة البدء'] }); }, 300);
+  } else {
+    setTimeout(function() { showBotMsg(flow.start); }, 300);
+  }
+}
+
+// Auto-open after 8 seconds on first visit
+if (!sessionStorage.getItem('chatSeen')) {
+  setTimeout(function() {
+    if (!chatOpen) { toggleChat(); sessionStorage.setItem('chatSeen','1'); }
+  }, 8000);
+}
 </script>
 </body>
 </html>
