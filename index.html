@@ -418,18 +418,30 @@ nav {
 /* ── CHATBOT ── */
 .chat-widget { position: fixed; bottom: 1.75rem; left: 1.75rem; z-index: 500; font-family: 'Montserrat', sans-serif; }
 .chat-toggle {
-  width: 58px; height: 58px; border-radius: 50%; border: none; cursor: pointer;
+  width: 62px; height: 62px; border-radius: 50%; border: none; cursor: pointer;
   background: linear-gradient(135deg, #b8922a, #e2bc50);
-  box-shadow: 0 4px 20px rgba(184,146,42,0.45);
+  box-shadow: 0 0 0 0 rgba(226,188,80,0.5);
   display: flex; align-items: center; justify-content: center;
-  animation: chatPulse 2.5s ease-in-out infinite;
+  animation: chatPulse 2.2s ease-in-out infinite;
   transition: transform 0.2s, box-shadow 0.2s;
-  padding: 0; overflow: hidden;
+  padding: 0; overflow: visible; position: relative;
 }
-.chat-toggle:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(184,146,42,0.6); animation: none; }
+.chat-toggle::before {
+  content: '';
+  position: absolute; inset: -6px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(226,188,80,0.35) 0%, rgba(226,188,80,0) 70%);
+  animation: chatGlow 2.2s ease-in-out infinite;
+  pointer-events: none;
+}
+.chat-toggle:hover { transform: scale(1.12); box-shadow: 0 0 30px 8px rgba(226,188,80,0.55); animation: none; }
+.chat-toggle:hover::before { background: radial-gradient(circle, rgba(226,188,80,0.5) 0%, rgba(226,188,80,0) 70%); }
 @keyframes chatPulse {
-  0%,100% { box-shadow: 0 4px 20px rgba(184,146,42,0.45); }
-  50% { box-shadow: 0 4px 28px rgba(184,146,42,0.75); }
+  0%,100% { box-shadow: 0 0 0 0 rgba(226,188,80,0.5), 0 4px 20px rgba(184,146,42,0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(226,188,80,0), 0 6px 28px rgba(184,146,42,0.6); }
+}
+@keyframes chatGlow {
+  0%,100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.18); }
 }
 .chat-avatar-svg { width: 58px; height: 58px; }
 .chat-box {
